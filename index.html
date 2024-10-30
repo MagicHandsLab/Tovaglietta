@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet"> <!-- Assicurati di sostituire con il link corretto -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    <style>
+        .color-picker {
+            display: inline-block;
+            width: 30px;  /* Maggiore larghezza per una migliore visibilità */
+            height: 30px; /* Maggiore altezza per una migliore visibilità */
+            margin: 5px;  /* Maggiore margine per evitare sovrapposizioni */
+            cursor: pointer;
+            border: 1px solid #ccc; /* Bordo per delimitare il colore */
+            border-radius: 5px;     /* Bordo arrotondato per un aspetto migliore */
+        }
+    </style>
+    </head>
+<body>
+    <h1>Personalizza la tua Tovaglietta</h1>
+    <link rel="stylesheet" href="style.css">
+    <div>
+    <label for="nome-input">Inserisci il tuo nome:</label>
+    <input type="text" id="nome-input" placeholder="Nome">
+    <button onclick="aggiungiNome()">Aggiungi Nome</button>
+    </div>
+
+   
+
+    <div style="display: flex; align-items: center;">
+    <label for="colori">Seleziona un colore per il testo:</label>
+    <div>
+        <div class="color-picker" style="background-color: #FF0000;" onclick="selezionaColore('#FF0000')"></div>
+        <div class="color-picker" style="background-color: #00FF00;" onclick="selezionaColore('#00FF00')"></div>
+        <div class="color-picker" style="background-color: #0000FF;" onclick="selezionaColore('#0000FF')"></div>
+        <div class="color-picker" style="background-color: #FFFF00;" onclick="selezionaColore('#FFFF00')"></div>
+        <div class="color-picker" style="background-color: #FF00FF;" onclick="selezionaColore('#FF00FF')"></div>
+        <div class="color-picker" style="background-color: #00FFFF;" onclick="selezionaColore('#00FFFF')"></div>
+        <div class="color-picker" style="background-color: #000000;" onclick="selezionaColore('#000000')"></div>
+        <div class="color-picker" style="background-color: #FFFFFF;" onclick="selezionaColore('#FFFFFF')"></div>
+        <div class="color-picker" style="background-color: #888888;" onclick="selezionaColore('#888888')"></div>
+        <div class="color-picker" style="background-color: #FFA500;" onclick="selezionaColore('#FFA500')"></div>
+    </div>
+</div>
+    
+    <main>
+        <!-- Sezione per la scelta delle tovagliette -->
+        <section id="seleziona-tovaglietta">
+            <h2>Seleziona una Tovaglietta</h2>
+            <div id="tovagliette-lista">
+                <!-- Lista delle tovagliette con immagini cliccabili -->
+                <img src="tovaglietta1.png" alt="Tovaglietta 1" onclick="selezionaTovaglietta('tovaglietta1.png')">
+                <img src="tovaglietta2.png" alt="Tovaglietta 2" onclick="selezionaTovaglietta('tovaglietta2.png')">
+                <img src="tovaglietta3.png" alt="Tovaglietta 3" onclick="selezionaTovaglietta('tovaglietta3.png')">
+            </div>
+        </section>
+
+        <!-- Sezione per la scelta degli accessori -->
+        <section id="seleziona-accessorio">
+            <h2>Seleziona un Accessorio</h2>
+            <div class="accessori-iniziali">
+                <!-- Lista degli accessori con immagini cliccabili -->
+                <img src="img/ape1.png" onclick="mostraModal('accessorio1')" alt="Accessorio 1">
+                <img src="img/cuore1.png" onclick="mostraModal('accessorio2')" alt="Accessorio 2">
+                <img src="img/dino1.png" onclick="mostraModal('accessorio3')" alt="Accessorio 3">
+                <img src="img/farfalla1.png"  onclick="mostraModal('accessorio4')" alt="Accessorio 4">
+                <img src="img/fiore1.png"  onclick="mostraModal('accessorio5')" alt="Accessorio 5">
+                <img src="img/fioreB1.png"  onclick="mostraModal('accessorio6')" alt="Accessorio 6">
+                <img src="img/foglia1.png"  onclick="mostraModal('accessorio7')" alt="Accessorio 7">
+            </div>
+            <!-- Modal Popup per la selezione degli accessori aggiuntivi -->
+    <div id="modal" class="modal">
+        <div id="oggetti-container"></div>
+        <div class="modal-content">
+            <span class="close" onclick="chiudiModal()">&times;</span>
+            <h2>Scegli un Accessorio Aggiuntivo</h2>
+            <div class="oggetti-container" class="oggetti-container">
+                <!-- Aggiungi altri oggetti come desiderato -->
+            </div>
+        </div>
+    </div>
+        </section>
+
+        <!-- Canvas per la visualizzazione della tovaglietta -->
+        <section id="personalizza">
+            <h2>Personalizza</h2>
+            <div id="canvas-container">
+                <canvas id="tovaglietta-canvas" width="600" height="400"></canvas>
+            </div>
+        </section>
+    </main>
+<script>
+       let coloreSelezionato = '#000000'; // Colore di testo predefinito (nero)
+
+        // Funzione per selezionare il colore
+        function selezionaColore(colore) {
+            coloreSelezionato = colore;
+            const oggettoAttivo = canvas.getActiveObject();
+            if (oggettoAttivo && oggettoAttivo.type === 'textbox') {
+                        oggettoAttivo.set('fill', coloreSelezionato);
+                        canvas.renderAll(); // Rende il canvas per mostrare il cambiamento
+             }
+        }
+        // Cambia il colore del testo selezionato, se presente
+        
+        // Funzione per aggiungere il testo dal campo di input
+        function aggiungiNome() {
+            const nome = document.getElementById('nome-input').value;
+            if (!nome) {
+                alert("Per favore, inserisci un nome.");
+                return;
+            }
+            const radius = 100; // Raggio dell'arco
+            const arcPath = new fabric.Path(`M 150 200 A ${radius} ${radius} 0 0 1 450 200`, {
+                fill: 'transparent',
+                stroke: 'transparent'
+            });
+            // Aggiungi il testo al canvas
+            const textbox = new fabric.Textbox(nome, {
+                fontFamily: 'PlaywriteGBS',
+                fontSize: 60,
+                fill: coloreSelezionato,
+                textAlign: 'center',
+                editable: true,
+                hasControls: true,
+                lineHeight: 14.2,  // Aumenta la spaziatura verticale per evitare il taglio
+                left: 100,
+                top: 150,
+                path: arcPath, // Associa il percorso
+                pathSide: 'left',
+                pathAlign: 'center'
+            });
+            textbox.set({
+                left: (canvas.width / 2) - (textbox.width / 2),
+                top: 150
+            });
+            // Aggiungi la casella di testo al canvas
+            canvas.add(arcPath);
+            canvas.add(textbox);
+            canvas.setActiveObject(textbox); // rende la casella di testo attiva
+
+            // Resetta il campo di input
+            document.getElementById('nome-input').value = "";
+            
+        }
+    </script>
+ <script src="script.js"></script>
+</body>
+</html>
