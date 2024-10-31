@@ -16,17 +16,21 @@ function resizeCanvas() {
     ctx.drawImage(img, padding, padding, imgWidth, imgHeight);
 }
 function scaricaImmagine() {
-    const dataURL = canvas.toDataURL({
-        format: 'png',
-        quality: 1
-    });
-
-    // Creazione di un link per il download
     const link = document.createElement('a');
-    link.href = dataURL;
+    link.href = canvas.toDataURL('image/png');
     link.download = 'tovaglietta.png';
-    link.click();
-    console.log(dataURL);
+    
+    // Verifica se il download diretto funziona
+    if (link.href && navigator.userAgent.includes('Instagram') === false) {
+        link.click(); // Funziona sui browser completi
+    } else {
+        // Mostra immagine per il download manuale
+        const img = document.createElement('img');
+        img.src = canvas.toDataURL('image/png');
+        img.style.width = "100%";
+        document.body.appendChild(img);
+        alert("Premi a lungo sull'immagine per salvarla.");
+    }
 }
 
 // Assegna la funzione al pulsante di download
