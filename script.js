@@ -16,25 +16,23 @@ function resizeCanvas() {
     ctx.drawImage(img, padding, padding, imgWidth, imgHeight);
 }
 function scaricaImmagine() {
+    const dataURL = canvas.toDataURL({
+        format: 'png',
+        quality: 1
+    });
+
+    // Creazione di un link per il download
     const link = document.createElement('a');
-    link.href = canvas.toDataURL('image/png');
+    link.href = dataURL;
     link.download = 'tovaglietta.png';
-    
-    // Verifica se il download diretto funziona
-    if (link.href && navigator.userAgent.includes('Instagram') === false) {
-        link.click(); // Funziona sui browser completi
-    } else {
-        // Mostra immagine per il download manuale
-        const img = document.createElement('img');
-        img.src = canvas.toDataURL('image/png');
-        img.style.width = "100%";
-        document.body.appendChild(img);
-        alert("Premi a lungo sull'immagine per salvarla.");
-    }
+    link.click();
+    console.log(dataURL);
 }
+
 
 // Assegna la funzione al pulsante di download
 document.getElementById('scarica-immagine').addEventListener('click', scaricaImmagine);
+document.getElementById('rimuovi-oggetto').addEventListener('click', rimuoviOggetto);
 // Funzione per caricare la tovaglietta selezionata
 function selezionaTovaglietta(tovagliettaSrc) {
     console.log("Selezionata tovaglietta:", tovagliettaSrc); // Debug: verifica quale tovaglietta è stata selezionata
@@ -227,7 +225,19 @@ function aggiungiTestoCurvo(testString) {
         canvas.add(letter);
     }
 }
+function rimuoviOggetto() {
+    // Ottieni l'oggetto selezionato
+    const oggettoSelezionato = canvas.getActiveObject();
 
+    // Verifica se esiste un oggetto selezionato
+    if (oggettoSelezionato) {
+        canvas.remove(oggettoSelezionato); // Rimuovi l'oggetto
+        canvas.discardActiveObject(); // Deseleziona l'oggetto rimosso
+        canvas.renderAll(); // Rende visibile il cambiamento
+    } else {
+        alert("Nessun oggetto selezionato.");
+    }
+}
 
 
 
