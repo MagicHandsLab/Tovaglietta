@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet"> <!-- Assicurati di sostituire con il link corretto -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
@@ -175,6 +175,10 @@
         }
         // Cambia il colore del testo selezionato, se presente
         // Funzione per aggiungere il testo dal campo di input
+        // Carica il font prima di aggiungere il testo al canvas
+document.fonts.load('1em Pacifico').then(() => {
+    aggiungiTesto('Esempio di testo'); // Cambia con il testo desiderato
+});
         function aggiungiNome() {
             const nome = document.getElementById('nome-input').value;
             if (!nome) {
@@ -188,7 +192,7 @@
             });
             // Aggiungi il testo al canvas
             const textbox = new fabric.Textbox(nome, {
-                fontFamily: 'PlaywriteGBS',
+                fontFamily: 'Pacifico',
                 fontSize: 60,
                 fill: coloreSelezionato,
                 textAlign: 'center',
