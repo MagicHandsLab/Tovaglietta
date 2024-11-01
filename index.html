@@ -209,12 +209,12 @@ document.fonts.load('1em Pacifico').then(() => {
             // Aggiungi il testo al canvas
             const textbox = new fabric.Textbox(nome, {
                 fontFamily: 'Pacifico',
-                fontSize: 60,
+                fontSize: 70,
                 fill: coloreSelezionato,
                 textAlign: 'center',
                 editable: true,
                 hasControls: true,
-                lineHeight: 14.2,  // Aumenta la spaziatura verticale per evitare il taglio
+                lineHeight: 1,  // Aumenta la spaziatura verticale per evitare il taglio
                 left: 100,
                 top: 150,
                 path: arcPath, // Associa il percorso
