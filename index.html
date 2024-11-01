@@ -10,9 +10,6 @@
   gtag('js', new Date());
   gtag('config', 'G-B7WMPCF911');
 </script>
-
-
-
     <meta charset="UTF-8">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
@@ -107,14 +104,14 @@
     </style>
     </head>
 <body>
-    <h1>Personalizza la tua Tovaglietta</h1>
+    <h1 id="titolo">Personalizza la tua Tovaglietta</h1>
     <link rel="stylesheet" href="style.css">
     
     
     <main>
         <!-- Sezione per la scelta delle tovagliette -->
         <section id="seleziona-tovaglietta">
-            <h2>Seleziona una Tovaglietta</h2>
+            <h2 testo>Seleziona una Tovaglietta</h2>
             <div id="tovagliette-lista">
                 <!-- Lista delle tovagliette con immagini cliccabili -->
                 <img src="tovaglietta1.png" alt="Tovaglietta 1" onclick="selezionaTovaglietta('tovaglietta1.png')">
@@ -123,12 +120,12 @@
             </div>
         </section>
 <div>
-        <label for="nome-input">Inserisci il tuo nome:</label>
-        <input type="text" id="nome-input" class="custom-textbox"placeholder="Nome">
+        <label id="label1" for="nome-input">Inserisci il tuo nome:</label>
+        <input type="text" id="nome-input" class="custom-textbox"placeholder="">
         <button id="aggiungi-nome" onclick="aggiungiNome()">Aggiungi Nome</button>
     </div>
     <div style="display: flex; align-items: center;">
-        <label for="colori">Seleziona un colore per il nome:</label>
+        <label id="label2" for="colori">Seleziona un colore per il nome:</label>
     <div>        
         <div class="color-picker" style="background-color: #E1E4E5;" onclick="selezionaColore('#E1E4E5')"></div>
         <div class="color-picker" style="background-color: #D7B686;" onclick="selezionaColore('#D7B686')"></div>
@@ -151,7 +148,7 @@
     </div>
         <!-- Sezione per la scelta degli accessori -->
         <section id="seleziona-accessorio">
-            <h2>Seleziona un Accessorio</h2>
+            <h2 testo2>Seleziona un Accessorio</h2>
             <div class="accessori-iniziali">
                 <!-- Lista degli accessori con immagini cliccabili -->
                 <img src="img/ape1.png" onclick="mostraModal('accessorio1')" alt="Accessorio 1">
@@ -174,8 +171,8 @@
         </section>
 <button id="rimuovi-oggetto">Rimuovi Oggetto Selezionato</button>
         <section id="personalizza">
-            <h2>Personalizza</h2>
-            <button id="scarica-immagine">Scarica immagine</button>
+            <h2 testo3>Personalizza</h2>
+            <button id="scarica-immagine">Scarica Immagine</button>
             <div id="canvas-container">
                 <canvas id="tovaglietta-canvas" width="300" height="300"></canvas>
             </div>
@@ -237,6 +234,28 @@ document.fonts.load('1em Pacifico').then(() => {
             document.getElementById('nome-input').value = "";
             
         }
+
+        function rilevaLingua() {
+            const linguaUtente = navigator.language || navigator.userLanguage;
+
+            // Controlla se la lingua non è impostata su italiano (it o it-IT)
+            if (!linguaUtente.startsWith("it")) {
+                document.getElementById("titolo").textContent = "Personalized Placemat"; // Cambia il titolo in inglese
+                document.getElementById("testo").textContent = "Select a Placemat"; // Cambia il titolo in inglese
+                document.getElementById("testo2").textContent = "Select an Accessory"; // Cambia il titolo in inglese
+                document.getElementById("testo3").textContent = "Customize"; // Cambia il titolo in inglese
+                document.getElementById("label1").textContent = "Wrtite your Name"; // Cambia il titolo in inglese
+                document.getElementById("aggiungi-nome").textContent = "Add Name"; // Cambia il titolo in inglese
+                document.getElementById("label2").textContent = "Select a color for the Name"; // Cambia il titolo in inglese
+                document.getElementById("rimuovi-oggetto").textContent = "Remove Object"; // Cambia il titolo in inglese
+                document.getElementById("scarica-immagine").textContent = "Download Image"; // Cambia il titolo in inglese
+
+            }
+        }
+
+        // Inizializza il rilevamento della lingua al caricamento della pagina
+        rilevaLingua();
+
     </script>
  <script src="script.js"></script>
 </body>
