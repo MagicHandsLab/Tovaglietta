@@ -47,7 +47,7 @@
 
 
 body {
-    font-family: 'PlaywriteGBS';
+    font-family: 'Pacifico';
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -59,11 +59,16 @@ header, main {
     margin: 0 auto;
 }
 
-#seleziona-tovaglietta, #seleziona-accessorio, #personalizza {
+#seleziona-tovaglietta, #seleziona-accessorio, #personalizza, #rimuovi-oggetto {
     margin-top: 20px;
     text-align: center;
 }
-
+#rimuovi-oggetto {
+    margin-top: 10px; /* Spazio tra il canvas e il bottone */
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
 #tovagliette-lista img, #accessori-lista img {
     width: 80px;
     margin: 10px;
