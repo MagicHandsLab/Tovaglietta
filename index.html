@@ -255,7 +255,19 @@ document.fonts.load('1em Pacifico').then(() => {
 
         // Inizializza il rilevamento della lingua al caricamento della pagina
         rilevaLingua();
+        function cambiaColoreTitolo() {
+            const titolo = document.getElementById('titolo');
+            const colori = ['#ff5733', '#33ff57', '#3357ff', '#ff33a1', '#a133ff', '#33ffd7'];
+            let indice = 0;
 
+            setInterval(() => {
+                titolo.style.color = colori[indice]; // Cambia il colore del titolo
+                indice = (indice + 1) % colori.length; // Passa al colore successivo
+            }, 1000); // Cambia colore ogni 1000 millisecondi (1 secondo)
+        }
+
+        // Inizializza il cambiamento di colore del titolo all'avvio
+        cambiaColoreTitolo();
     </script>
  <script src="script.js"></script>
 </body>
