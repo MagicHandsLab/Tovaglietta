@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B7WMPCF911"></script>
 <script>
@@ -15,6 +14,43 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        /* Stile per il popup */
+        #popupOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Sfondo scuro semitrasparente */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        #popupContent {
+            background: white;
+            padding: 2em;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #popupContent h2 {
+            margin-top: 0;
+        }
+
+        #popupContent button {
+            margin-top: 1em;
+            padding: 0.5em 1.5em;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        /* Oscura il resto della pagina */
+        .blurred {
+            filter: blur(5px); /* Effetto offuscato */
+        }
         .color-picker {
             display: inline-block;
             width: 30px;  /* Maggiore larghezza per una migliore visibilità */
@@ -121,7 +157,34 @@
                 <img src="tovaglietta3.png" alt="Tovaglietta 3" onclick="selezionaTovaglietta('tovaglietta3.png')">
             </div>
         </section>
-<div>
+        <!-- Popup iniziale -->
+    <div id="popupOverlay">
+        <div id="popupContent">
+            <h2>Pronto a creare una nuova tovaglietta?</h2>
+            <p>Premi OK per iniziare a creare la tua tovaglietta personalizzata.</p>
+            <button onclick="closePopup()">OK</button>
+        </div>
+    </div>
+    <audio id="audioGuida">
+        <source src="voce_guida.mp3" type="audio/mpeg">
+        Il tuo browser non supporta il tag audio.
+    </audio>
+    <script>
+        function closePopup() {
+            // Nasconde il popup
+            document.getElementById('popupOverlay').style.display = 'none';
+            // Rimuove l'effetto di offuscamento dalla pagina
+            document.body.classList.remove('blurred');
+            const audio = document.getElementById('audioGuida');
+            audio.play().catch(error => {
+                console.log("Errore nell'avvio dell'audio:", error);
+            });
+
+            // Nasconde il popup e rimuove l'overlay
+            //document.getElementById('overlay').style.display = 'none';
+        }
+    </script>
+        <div>
         <label id="label1" for="nome-input">Inserisci il tuo nome:</label>
         <input type="text" id="nome-input" class="custom-textbox"placeholder="">
         <button id="aggiungi-nome" onclick="aggiungiNome()">Aggiungi Nome</button>
@@ -195,7 +258,6 @@
         // Funzione per aggiungere il testo dal campo di input
         // Carica il font prima di aggiungere il testo al canvas
 document.fonts.load('1em Pacifico').then(() => {
-    aggiungiTesto('Esempio di testo'); // Cambia con il testo desiderato
 });
         function aggiungiNome() {
             const nome = document.getElementById('nome-input').value;
@@ -272,6 +334,7 @@ document.fonts.load('1em Pacifico').then(() => {
         // Inizializza il cambiamento di colore del titolo all'avvio
         cambiaColoreTitolo();
     </script>
+
  <script src="script.js"></script>
 </body>
 </html>
