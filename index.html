@@ -60,7 +60,16 @@
             border: 1px solid #ccc; /* Bordo per delimitare il colore */
             border-radius: 5px;     /* Bordo arrotondato per un aspetto migliore */
         }
-        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px; /* Spazio tra canvas e pulsante */
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
 
         /* Stile per il canvas */
         #tovaglietta-canvas {
@@ -135,8 +144,6 @@
 <body>
     <h1 id="titolo">Personalizza la tua Tovaglietta</h1>
     <link rel="stylesheet" href="style.css">
-    
-    
     <main>
         <!-- Sezione per la scelta delle tovagliette -->
         <section id="seleziona-tovaglietta">
@@ -177,8 +184,11 @@
     </script>
         <div>
         <label id="label1" for="nome-input">Inserisci il tuo nome:</label>
+
         <input type="text" id="nome-input" class="custom-textbox"placeholder="">
-        <button id="aggiungi-nome" onclick="aggiungiNome()">Aggiungi Nome</button>
+        <div>
+            <button id="aggiungi-nome" onclick="aggiungiNome()">Aggiungi Nome</button>
+        </div>
     </div>
     <div style="display: flex; align-items: center;">
         <label id="label2" for="colori">Seleziona un colore per il nome:</label>
@@ -207,27 +217,31 @@
             <h2 testo2>Seleziona un Accessorio</h2>
             <div class="accessori-iniziali">
                 <!-- Lista degli accessori con immagini cliccabili -->
-                <img src="img/ape1.png" onclick="mostraModal('accessorio1')" alt="Accessorio 1">
-                <img src="img/cuore1.png" onclick="mostraModal('accessorio2')" alt="Accessorio 2">
-                <img src="img/dino1.png" onclick="mostraModal('accessorio3')" alt="Accessorio 3">
-                <img src="img/farfalla1.png"  onclick="mostraModal('accessorio4')" alt="Accessorio 4">
-                <img src="img/fiore1.png"  onclick="mostraModal('accessorio5')" alt="Accessorio 5">
-                <img src="img/fioreB1.png"  onclick="mostraModal('accessorio6')" alt="Accessorio 6">
-                <img src="img/foglia1.png"  onclick="mostraModal('accessorio7')" alt="Accessorio 7">
+                <img src="img/ape1.png" alt="Accessorio Ape" class="oggetto" data-nome="ape">
+                <img src="img/cuore1.png" alt="Accessorio Cuore" class="oggetto" data-nome="cuore">
+                <img src="img/dino1.png" oalt="Accessorio Dino" class="oggetto" data-nome="dino">
+                <img src="img/farfalla1.png"  alt="Accessorio Farfalla" class="oggetto" data-nome="farfalla">
+                <img src="img/fiore1.png" alt="Accessorio Fiore" class="oggetto" data-nome="fiore">
+                <img src="img/fioreB1.png" alt="Accessorio FioreB" class="oggetto" data-nome="fioreB">
+                <img src="img/foglia1.png" alt="Accessorio Foglia" class="oggetto" data-nome="foglia">
             </div>
             <!-- Modal Popup per la selezione degli accessori aggiuntivi -->
-    <div id="modal" class="modal">
-        <div id="oggetti-container"></div>
-        <div class="modal-content">
-            <div class="oggetti-container" class="oggetti-container">
-                <!-- Aggiungi altri oggetti come desiderato -->
+    <!-- Modal per visualizzare gli oggetti disponibili -->
+     <div class="overlay" id="overlay"></div>
+
+        <div id="accessoriModal" class="modal">
+            <div id="listaOggetti" class="oggetti-container">
+                
             </div>
-        </div>
-    </div>
+         </div> 
+
         </section>
 <button id="rimuovi-oggetto">Rimuovi Oggetto Selezionato</button>
         <section id="personalizza">
             <h2 testo3>Personalizza</h2>
+            <!-- Elemento per visualizzare il prezzo totale -->
+            <p id="prezzoTotale">Prezzo totale: €<span id="prezzoTotaleValue">0.00</span></p>
+
             <button id="scarica-immagine">Scarica Immagine</button>
             <div id="canvas-container">
                 <canvas id="tovaglietta-canvas" width="300" height="300"></canvas>
@@ -281,12 +295,15 @@ document.fonts.load('1em Pacifico').then(() => {
                 top: 150
             });
             // Aggiungi la casella di testo al canvas
-            canvas.add(arcPath);
+            //canvas.add(arcPath);
             canvas.add(textbox);
             canvas.setActiveObject(textbox); // rende la casella di testo attiva
-
+            prezzoTotale += costoNome;
+            aggiornaPrezzo();
             // Resetta il campo di input
             document.getElementById('nome-input').value = "";
+            // Aggiunge evento di rimozione
+    
             
         }
 

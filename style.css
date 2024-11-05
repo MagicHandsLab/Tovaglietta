@@ -1,29 +1,29 @@
 //* Layout di default per desktop */
 .container {
     display: flex;
-    flex-direction: inline-block;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 20px;
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Sfondo scuro semi-trasparente */
+    display: none; /* Nascondi di default */
+
+    z-index: 999; /* Assicura che sia sopra altri contenuti */
 }
 
 /* Layout per dispositivi mobili */
 @media (max-width: 768px) {
     .container {
-        display: inline-block;
-        flex-direction: inline-block;
+        flex-direction: column; /* Disposizione verticale per mobile */
         align-items: center;
-        justify-content: center;
-        gap: 20px;
-    }
-    .custom-textbox {
-        height: 20px; /* Altezza della textbox */
-        width: 20px;
-        padding: 10px; /* Spaziatura interna */
-        font-size: 15px; /* Dimensione del font nella textbox */
-        border: 1px solid #ccc; /* Bordo della textbox */
-        border-radius: 5px; /* Angoli arrotondati */
-        transition: border-color 0.3s; /* Transizione per il cambio del bordo */
+        padding: 10px;
     }
     canvas {
         width: 100%; /* Canvas più piccolo per adattarsi allo schermo */
@@ -34,15 +34,19 @@
         width: 20px; /* Riduce la dimensione dei selettori di colore */
         height: 20px;
     }
+
     button, input[type="text"] {
         width: 100%; /* Larghezza completa per pulsanti e campi di testo */
         font-size: 1rem; /* Dimensione testo maggiore per migliorare la leggibilità */
         margin-top: 10px;
     }
+
     h1 {
         font-size: 1.5rem; /* Dimensione del titolo ridotta per mobile */
         text-align: center;
     }
+
+
 }
 
 
@@ -58,20 +62,72 @@ header, main {
     max-width: 800px;
     margin: 0 auto;
 }
+#accessoriModal {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    width: 90%; /* Larghezza al 100% dello schermo */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* Sfondo semi-trasparente */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    z-index: 1000; /* Assicura che il popup appaia sopra l'overlay */
+    display: none; /* Nascondi di default */
+    overflow: auto;
+    backdrop-filter: blur(8px); /* Effetto sfocatura */
+    transform: translateY(-50%); /* Centra verticalmente */
+}
+
+#listaOggetti {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#accessoriModal.show {
+    display: block;
+}
 
 #seleziona-tovaglietta, #seleziona-accessorio, #personalizza, #rimuovi-oggetto {
     margin-top: 20px;
     text-align: center;
 }
 #rimuovi-oggetto {
-    margin-top: 10px; /* Spazio tra il canvas e il bottone */
+    display: block;
+    margin: 20px auto; /* Imposta il margine automatico orizzontale */
     padding: 10px 20px;
-    font-size: 16px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
 }
-#tovagliette-lista img, #accessori-lista img {
+#aggiungi-nome {
+    display: block;
+    margin: 20px auto; /* Imposta il margine automatico orizzontale */
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+#tovagliette-lista img, #listaOggetti img {
     width: 80px;
     margin: 10px;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+#listaOggetti img {
+    width: 40px;
+    margin: 5px;
     cursor: pointer;
     border: 2px solid transparent;
 }
@@ -134,14 +190,22 @@ header, main {
 </style>
 /* Stile per il modal */
 .modal {
-    display: none; /* Nascondi il modal di default */
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Sfondo semi-trasparente */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra gli elementi nel popup */
+    justify-content: center; /* Allinea verticalmente al centro */
+    padding: 20px;
+    border: 1px solid #ccc; /* Bordo del popup */
+    background-color: rgba(255, 255, 255, 0.8); /* Colore di sfondo bianco con trasparenza */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 500px;
+    margin: auto; /* Centra il modal nella pagina */
+    border-radius: 8px; /* Angoli arrotondati */
+    position: absolute; /* Posizionamento assoluto */
+    top: 50%; /* Sposta verso il centro verticale */
+    left: 50%; /* Sposta verso il centro orizzontale */
+    transform: translate(-50%, -50%); /* Allinea al centro esatto */
 }
 
 .modal-content {
@@ -162,26 +226,28 @@ header, main {
 
 .oggetti-container {
     display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: row; /* Disposizione orizzontale */
+    flex-wrap: wrap; /* Permette di andare a capo se non c'è spazio */
+    justify-content: center; /* Centra gli oggetti */
+    margin-bottom: 15px; /* Spazio tra gli oggetti e il bottone */
 }
 .custom-textbox {
-    height: 25px; /* Altezza della textbox */
+    height: 20px; /* Altezza della textbox */
+    width: 200px;
     padding: 10px; /* Spaziatura interna */
-    font-size: 20px; /* Dimensione del font nella textbox */
+    font-size: 15px; /* Dimensione del font nella textbox */
     border: 1px solid #ccc; /* Bordo della textbox */
     border-radius: 5px; /* Angoli arrotondati */
     transition: border-color 0.3s; /* Transizione per il cambio del bordo */
 }
-
 .custom-textbox:focus {
     border-color: #007BFF; /* Colore del bordo quando la textbox è attiva */
     outline: none; /* Rimuove l'outline predefinito */
 }
 .oggetti-container img {
-    width: 80px;
-    height: 80px;
+    width: 40px;
+    height: 40px;
+    margin: 3px;
     cursor: pointer;
     transition: transform 0.2s;
 }

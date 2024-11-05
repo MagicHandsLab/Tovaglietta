@@ -15,6 +15,18 @@ function resizeCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(img, padding, padding, imgWidth, imgHeight);
 }
+// Prezzi di base
+const prezzoBase = 10.00; // Prezzo di base della tovaglietta
+const costoNome = 2.00;  // Costo per aggiungere un nome
+const costoAccessorio = 0.50; // Costo per aggiungere un accessorio
+
+// Variabile per tracciare il prezzo totale
+let prezzoTotale = prezzoBase;
+
+// Funzione per aggiornare il prezzo nel DOM
+function aggiornaPrezzo() {
+    document.getElementById("prezzoTotaleValue").textContent = prezzoTotale.toFixed(2);
+}
 function scaricaImmagine() {
     const dataURL = canvas.toDataURL({
         format: 'png',
@@ -28,11 +40,13 @@ function scaricaImmagine() {
     link.click();
     console.log(dataURL);
 }
-
-
 // Assegna la funzione al pulsante di download
 document.getElementById('scarica-immagine').addEventListener('click', scaricaImmagine);
 document.getElementById('rimuovi-oggetto').addEventListener('click', rimuoviOggetto);
+// Mostra il modal
+// Event listener per chiudere il modal quando si clicca sulla 'x'
+
+
 // Funzione per caricare la tovaglietta selezionata
 function selezionaTovaglietta(tovagliettaSrc) {
     console.log("Selezionata tovaglietta:", tovagliettaSrc); // Debug: verifica quale tovaglietta è stata selezionata
@@ -65,90 +79,76 @@ function selezionaTovaglietta(tovagliettaSrc) {
         console.error("Immagine della tovaglietta non trovata nella lista:", tovagliettaSrc);
     }
 }
-const accessori = {
-    "accessorio1": [
-        "img/ape1.png",
-        "img/ape2.png"
-    ],
-    "accessorio2": [
-        "img/cuore1.png",
-        "img/cuore2.png",
-        "img/cuore3.png",
-        "img/cuore4.png",
-        "img/cuore5.png"
-    ],
-    "accessorio3": [
-        "img/dino1.png",
-        "img/dino2.png",
-        "img/dino3.png",
-        "img/dino4.png",
-        "img/dino5.png",
-        "img/dino6.png",
-        "img/dino7.png",
-        "img/dino8.png",
-        "img/dino9.png",
-        "img/dino10.png",
-        "img/dino11.png"
-    ],
-    "accessorio4": [
-        "img/farfalla1.png",
-        "img/farfalla2.png",
-        "img/farfalla3.png",
-        "img/farfalla4.png",
-        "img/farfalla5.png",
-        "img/farfalla6.png"
-    ],
-    "accessorio5": [
-        "img/fiore1.png",
-        "img/fiore2.png",
-        "img/fiore3.png"
-    ],
-    "accessorio6": [
-        "img/fioreB1.png",
-        "img/fioreB2.png",
-        "img/fioreB3.png",
-        "img/fioreB4.png"
-    ],
-    "accessorio7": [
-        "img/foglia1.png",
-        "img/foglia2.png",
-        "img/foglia3.png",
-        "img/foglia4.png",
-        "img/foglia5.png",
-        "img/foglia6.png"
-    ]
-};
-// Funzione per mostrare il modal e caricare gli accessori specifici
-function mostraModal(accessorioTipo) {
-    const oggettiContainer = document.getElementById('oggetti-container');
-    oggettiContainer.innerHTML = ''; // Pulisci il contenuto precedente
-    // Verifica se esiste il tipo di accessorio
-    if (!accessori[accessorioTipo]) {
-        console.error(`Tipo di accessorio "${accessorioTipo}" non trovato!`);
+    let magazzino;
+
+    // Carica i dati dal JSON
+    fetch("database.json")
+        .then(response => response.json())
+        .then(data => {
+            magazzino = data;
+            console.log("Magazzino caricato:", magazzino); // Log per controllare i dati
+
+        })
+        .catch(error => console.error("Errore nel caricamento del magazzino:", error));
+
+    // Funzione per aprire il modal e mostrare gli oggetti disponibili
+function apriModal(oggettoNome, elemento) {
+    const overlay = document.getElementById('overlay');
+    const modal = document.getElementById('accessoriModal');
+    const listaOggetti = document.getElementById('listaOggetti');
+    listaOggetti.innerHTML = ''; // Pulisce il contenuto precedente
+
+    const oggettiDisponibili = magazzino[oggettoNome]?.filter(obj => obj.quantità > 0) || [];
+    
+    // Se non ci sono oggetti disponibili, mostra un messaggio
+    if (oggettiDisponibili.length === 0) {
+        listaOggetti.innerHTML = "<p>Nessun oggetto disponibile</p>";
         return;
     }
-    // Log per confermare l'apertura del modal
-    console.log(`Apro il modal per il tipo di accessorio: ${accessorioTipo}`);
 
-    // Carica gli oggetti per il tipo selezionato
-    accessori[accessorioTipo].forEach(src => {
-        const img = document.createElement('img');
-        img.src = src;
-        img.onclick = () => aggiungiAccessorio(src);
-        // Log di debug per il caricamento dell'immagine
-        console.log(`Carico immagine: ${src}`);
-        oggettiContainer.appendChild(img);
+    // Aggiunge gli oggetti disponibili al modal
+    oggettiDisponibili.forEach(oggetto => {
+        const imgElement = document.createElement('img');
+        imgElement.src = oggetto.immagine;
+        imgElement.alt = oggetto.nome;
+        imgElement.style.width = '40px';
+        imgElement.style.cursor = 'pointer';
+        imgElement.style.margin = '10px';
+
+        // Aggiunge evento di click per inserire l'oggetto nel canvas
+        imgElement.addEventListener('click', () => {
+            aggiungiAccessorio(oggetto.immagine);
+            chiudiModal();
+        });
+
+        listaOggetti.appendChild(imgElement);
     });
+    
 
-    // Mostra il modal
-    document.getElementById('modal').style.display = 'block';
+   // Mostra overlay e popup centrato
+    overlay.style.display = 'block';
+    modal.style.display = 'flex';
 }
-
-// Funzione per nascondere il modal
 function chiudiModal() {
-    document.getElementById('modal').style.display = 'none';
+    const overlay = document.getElementById('overlay');
+    const modal = document.getElementById('accessoriModal');
+
+    // Nasconde overlay e popup
+    overlay.style.display = 'none';
+    modal.style.display = 'none';
 }
-// Funzione per aggiungere un accessorio trascinabile sul canvas
+document.getElementById('overlay').addEventListener('click', function () {
+    chiudiModal();
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const oggettiClickable = document.querySelectorAll('.oggetto');
+    oggettiClickable.forEach(oggetto => {
+        oggetto.addEventListener('click', () => {
+            const oggettoNome = oggetto.getAttribute('data-nome');
+            apriModal(oggettoNome, oggetto); // Passa l'elemento cliccato
+        });
+    });
+});    
 function aggiungiAccessorio(srcImmagine) {
     console.log("Selezionato Accessorio:", srcImmagine); // Debug: verifica quale accessorio è stato selezionato
     fabric.Image.fromURL(srcImmagine, function(img) {
@@ -165,6 +165,7 @@ function aggiungiAccessorio(srcImmagine) {
             hasControls: true,  // abilita i controlli (incl. rotazione)
             hasBorders: true,   // mostra i bordi di selezione
             cornerStyle: 'circle', // per visualizzare gli angoli arrotondati
+            tipo: 'accessorio'
         });
 
         // Aggiungi l'accessorio al canvas e rendilo attivo per il posizionamento
@@ -174,15 +175,18 @@ function aggiungiAccessorio(srcImmagine) {
     });
      // Chiudi il modal dopo aver selezionato un accessorio
     chiudiModal();
-}
-// Event listener per chiudere il modal se l'utente clicca fuori dal contenuto
-window.onclick = function(event) {
-    const modal = document.getElementById('modal');
-    if (event.target === modal) {
-        chiudiModal();
-    }
-};
+    prezzoTotale += costoAccessorio;
+    aggiornaPrezzo();
 
+     // Funzione per chiudere il modal
+
+}
+window.onclick = function(event) {
+        const modal = document.getElementById('accessoriModal');
+        if (event.target === modal) {
+            chiudiModal();
+        }
+};
 function aggiungiTesto() {
     const textbox = new fabric.Textbox('Inserisci il tuo nome', {
         left: 150,      // posizione iniziale a sinistra
@@ -195,9 +199,13 @@ function aggiungiTesto() {
     });
     
     // Aggiungi la casella di testo al canvas
-    canvas.add(textbox);
+    //canvas.add(textbox);
+    prezzoTotale += costoNome;
+    aggiornaPrezzo();
+
     console.log("Casella di testo aggiunta.");
 }
+
 function aggiungiTestoCurvo(testString) {
     const radius = 100; // Raggio dell'arco per il testo curvo
     const startAngle = -Math.PI / 2; // Inizia a metà cerchio (angolo in alto)
@@ -221,24 +229,39 @@ function aggiungiTestoCurvo(testString) {
             originY: 'center',
             angle: (angle * 180) / Math.PI + 90 // Ruota ogni lettera per seguire l'arco
         });
-
-        canvas.add(letter);
+               //canvas.add(letter);
     }
+     prezzoTotale += costoNome;
+    aggiornaPrezzo();
+}
+function startEditingText() {
+    document.body.classList.add('no-scroll'); // Blocca lo scrolling
+    // Codice per avviare la modifica del testo...
+}
+
+function stopEditingText() {
+    document.body.classList.remove('no-scroll'); // Riattiva lo scrolling
+    // Codice per terminare la modifica del testo...
 }
 function rimuoviOggetto() {
     // Ottieni l'oggetto selezionato
     const oggettoSelezionato = canvas.getActiveObject();
 
     // Verifica se esiste un oggetto selezionato
-    if (oggettoSelezionato) {
+    if (oggettoSelezionato.tipo === 'accessorio') {
         canvas.remove(oggettoSelezionato); // Rimuovi l'oggetto
         canvas.discardActiveObject(); // Deseleziona l'oggetto rimosso
         canvas.renderAll(); // Rende visibile il cambiamento
+        prezzoTotale -= costoAccessorio;
+        aggiornaPrezzo();
     } else {
-        alert("Nessun oggetto selezionato.");
+        canvas.remove(oggettoSelezionato); // Rimuovi l'oggetto
+        canvas.discardActiveObject(); // Deseleziona l'oggetto rimosso
+        canvas.renderAll(); // Rende visibile il cambiamento
+        prezzoTotale -= costoNome;
+        aggiornaPrezzo();
     }
 }
-
-
-
+// Aggiorna il prezzo totale iniziale
+aggiornaPrezzo();
 

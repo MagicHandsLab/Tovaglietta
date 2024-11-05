@@ -1,0 +1,53 @@
+{
+    "ape": [
+        { "nome": "ape1", "immagine": "img/ape1.png", "quantità": 3 }, 
+        { "nome": "ape2", "immagine": "img/ape2.png", "quantità": 1 }
+    ],
+    "cuore": [
+        { "nome": "cuore1", "immagine": "img/cuore1.png", "quantità": 5 },
+        { "nome": "cuore2", "immagine": "img/cuore2.png", "quantità": 1 },
+        { "nome": "cuore3", "immagine": "img/cuore3.png", "quantità": 2 },
+        { "nome": "cuore4", "immagine": "img/cuore4.png", "quantità": 2 },
+        { "nome": "cuore5", "immagine": "img/cuore5.png", "quantità": 2 }
+    ],
+    "dino": [
+        { "nome": "dino1", "immagine": "img/dino1.png", "quantità": 5 },
+        { "nome": "dino2", "immagine": "img/dino2.png", "quantità": 1 },
+        { "nome": "dino3", "immagine": "img/dino3.png", "quantità": 2 },
+        { "nome": "dino4", "immagine": "img/dino4.png", "quantità": 2 },
+        { "nome": "dino5", "immagine": "img/dino5.png", "quantità": 2 },
+        { "nome": "dino6", "immagine": "img/dino6.png", "quantità": 2 },
+        { "nome": "dino7", "immagine": "img/dino7.png", "quantità": 2 },
+        { "nome": "dino8", "immagine": "img/dino8.png", "quantità": 2 },
+        { "nome": "dino9", "immagine": "img/dino9.png", "quantità": 2 },
+        { "nome": "dino10", "immagine": "img/dino10.png", "quantità": 2 },
+        { "nome": "dino11", "immagine": "img/dino11.png", "quantità": 2 }
+    ],
+    "farfalla": [
+        { "nome": "farfalla1", "immagine": "img/farfalla1.png", "quantità": 5 },
+        { "nome": "farfalla2", "immagine": "img/farfalla2.png", "quantità": 1 },
+        { "nome": "farfalla3", "immagine": "img/farfalla3.png", "quantità": 2 },
+        { "nome": "farfalla4", "immagine": "img/farfalla4.png", "quantità": 5 },
+        { "nome": "farfalla5", "immagine": "img/farfalla5.png", "quantità": 1 },
+        { "nome": "farfalla6", "immagine": "img/farfalla6.png", "quantità": 2 }
+    ],
+    "fiore": [
+        { "nome": "fiore1", "immagine": "img/fiore1.png", "quantità": 5 },
+        { "nome": "fiore2", "immagine": "img/fiore2.png", "quantità": 1 },
+        { "nome": "fiore3", "immagine": "img/fiore3.png", "quantità": 2 }
+    ],
+    "fioreB": [
+        { "nome": "fioreB1", "immagine": "img/fioreB1.png", "quantità": 5 },
+        { "nome": "fioreB2", "immagine": "img/fioreB2.png", "quantità": 1 },
+        { "nome": "fioreB3", "immagine": "img/fioreB3.png", "quantità": 2 },
+        { "nome": "fioreB4", "immagine": "img/fioreB4.png", "quantità": 2 }
+    ],
+    "foglia": [
+        { "nome": "foglia1", "immagine": "img/foglia1.png", "quantità": 5 },
+        { "nome": "foglia2", "immagine": "img/foglia2.png", "quantità": 1 },
+        { "nome": "foglia3", "immagine": "img/foglia3.png", "quantità": 2 },
+        { "nome": "foglia4", "immagine": "img/foglia4.png", "quantità": 5 },
+        { "nome": "foglia5", "immagine": "img/foglia5.png", "quantità": 1 },
+        { "nome": "foglia6", "immagine": "img/foglia6.png", "quantità": 2 }
+    ]
+}
