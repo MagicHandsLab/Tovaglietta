@@ -1,7 +1,7 @@
 //* Layout di default per desktop */
 .container {
     display: flex;
-    flex-direction: row;
+    flex-direction: inline-block;
     align-items: center;
     justify-content: center;
     gap: 20px;
@@ -10,19 +10,21 @@
 /* Layout per dispositivi mobili */
 @media (max-width: 768px) {
     .container {
-        flex-direction: column; /* Disposizione verticale per mobile */
+        display: inline-block;
+        flex-direction: inline-block;
         align-items: center;
-        padding: 10px;
+        justify-content: center;
+        gap: 20px;
     }
-.custom-textbox {
-    height: 20px; /* Altezza della textbox */
-    width: 20px;
-    padding: 10px; /* Spaziatura interna */
-    font-size: 15px; /* Dimensione del font nella textbox */
-    border: 1px solid #ccc; /* Bordo della textbox */
-    border-radius: 5px; /* Angoli arrotondati */
-    transition: border-color 0.3s; /* Transizione per il cambio del bordo */
-}
+    .custom-textbox {
+        height: 20px; /* Altezza della textbox */
+        width: 20px;
+        padding: 10px; /* Spaziatura interna */
+        font-size: 15px; /* Dimensione del font nella textbox */
+        border: 1px solid #ccc; /* Bordo della textbox */
+        border-radius: 5px; /* Angoli arrotondati */
+        transition: border-color 0.3s; /* Transizione per il cambio del bordo */
+    }
     canvas {
         width: 100%; /* Canvas più piccolo per adattarsi allo schermo */
         height: auto; /* Altezza proporzionale alla larghezza */
@@ -32,13 +34,11 @@
         width: 20px; /* Riduce la dimensione dei selettori di colore */
         height: 20px;
     }
-
     button, input[type="text"] {
         width: 100%; /* Larghezza completa per pulsanti e campi di testo */
         font-size: 1rem; /* Dimensione testo maggiore per migliorare la leggibilità */
         margin-top: 10px;
     }
-
     h1 {
         font-size: 1.5rem; /* Dimensione del titolo ridotta per mobile */
         text-align: center;
