@@ -17,6 +17,39 @@
 
     z-index: 999; /* Assicura che sia sopra altri contenuti */
 }
+/* Stile per l'header e contenitore del logo */
+header {
+    padding: 20px;
+    background-color: transparent;
+}
+
+/* Contenitore per allineare il logo e il titolo orizzontalmente */
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Stile per il logo circolare */
+.logo {
+    width: 40px; /* Dimensione del logo */
+    height: 40px;
+    border-radius: 50%; /* Rende l'immagine circolare */
+    margin-right: 10px; /* Spazio tra logo e titolo */
+    object-fit: cover; /* Copre l'intera area circolare senza distorsioni */
+}
+
+/* Stile per il titolo */
+.logo-container h1 {
+    font-size: 24px;
+    color: #333;
+}
+h1 {
+        font-size: 1.5rem; /* Dimensione del titolo ridotta per mobile */
+        text-align: center;
+            position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    }
 
 /* Layout per dispositivi mobili */
 @media (max-width: 768px) {

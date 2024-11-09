@@ -24,9 +24,9 @@ const costoAccessorio = 0.50; // Costo per aggiungere un accessorio
 let prezzoTotale = prezzoBase;
 
 // Funzione per aggiornare il prezzo nel DOM
-function aggiornaPrezzo() {
-    document.getElementById("prezzoTotaleValue").textContent = prezzoTotale.toFixed(2);
-}
+//function aggiornaPrezzo() {
+//    document.getElementById("prezzoTotaleValue").textContent = prezzoTotale.toFixed(2);
+//}
 function scaricaImmagine() {
     const dataURL = canvas.toDataURL({
         format: 'png',
@@ -175,8 +175,8 @@ function aggiungiAccessorio(srcImmagine) {
     });
      // Chiudi il modal dopo aver selezionato un accessorio
     chiudiModal();
-    prezzoTotale += costoAccessorio;
-    aggiornaPrezzo();
+    //prezzoTotale += costoAccessorio;
+    //aggiornaPrezzo();
 
      // Funzione per chiudere il modal
 
@@ -200,8 +200,8 @@ function aggiungiTesto() {
     
     // Aggiungi la casella di testo al canvas
     //canvas.add(textbox);
-    prezzoTotale += costoNome;
-    aggiornaPrezzo();
+    //prezzoTotale += costoNome;
+    //aggiornaPrezzo();
 
     console.log("Casella di testo aggiunta.");
 }
@@ -231,8 +231,8 @@ function aggiungiTestoCurvo(testString) {
         });
                //canvas.add(letter);
     }
-     prezzoTotale += costoNome;
-    aggiornaPrezzo();
+     //prezzoTotale += costoNome;
+    //aggiornaPrezzo();
 }
 function startEditingText() {
     document.body.classList.add('no-scroll'); // Blocca lo scrolling
@@ -252,16 +252,16 @@ function rimuoviOggetto() {
         canvas.remove(oggettoSelezionato); // Rimuovi l'oggetto
         canvas.discardActiveObject(); // Deseleziona l'oggetto rimosso
         canvas.renderAll(); // Rende visibile il cambiamento
-        prezzoTotale -= costoAccessorio;
-        aggiornaPrezzo();
+        //prezzoTotale -= costoAccessorio;
+        //aggiornaPrezzo();
     } else {
         canvas.remove(oggettoSelezionato); // Rimuovi l'oggetto
         canvas.discardActiveObject(); // Deseleziona l'oggetto rimosso
         canvas.renderAll(); // Rende visibile il cambiamento
-        prezzoTotale -= costoNome;
-        aggiornaPrezzo();
+        //prezzoTotale -= costoNome;
+        //aggiornaPrezzo();
     }
 }
 // Aggiorna il prezzo totale iniziale
-aggiornaPrezzo();
+//aggiornaPrezzo();
 

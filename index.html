@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+<link rel="icon" href="img/favicon.png" type="image/x-icon">
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B7WMPCF911"></script>
 <script>
@@ -142,7 +144,12 @@
     </style>
     </head>
 <body>
-    <h1 id="titolo">Personalizza la tua Tovaglietta</h1>
+    <header>
+        <div class="logo-container">
+            <img src="img/logo.png" alt="Logo del Sito" class="logo">
+            <h1 id="titolo">Personalizza la tua Tovaglietta</h1>
+        </div>
+    </header>
     <link rel="stylesheet" href="style.css">
     <main>
         <!-- Sezione per la scelta delle tovagliette -->
@@ -299,7 +306,7 @@ document.fonts.load('1em Pacifico').then(() => {
             canvas.add(textbox);
             canvas.setActiveObject(textbox); // rende la casella di testo attiva
             prezzoTotale += costoNome;
-            aggiornaPrezzo();
+            //aggiornaPrezzo();
             // Resetta il campo di input
             document.getElementById('nome-input').value = "";
             // Aggiunge evento di rimozione
