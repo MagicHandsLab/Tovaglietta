@@ -16,39 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Stile per il popup */
-        #popupOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7); /* Sfondo scuro semitrasparente */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-
-        #popupContent {
-            background: white;
-            padding: 2em;
-            text-align: center;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        #popupContent h2 {
-            margin-top: 0;
-        }
-
-        #popupContent button {
-            margin-top: 1em;
-            padding: 0.5em 1.5em;
-            font-size: 1em;
-            cursor: pointer;
-        }
-
+       
         /* Oscura il resto della pagina */
         .blurred {
             filter: blur(5px); /* Effetto offuscato */
@@ -92,27 +60,23 @@
             border-radius: 5px;
             transition: background-color 0.3s;
         }
+         #btnCarrello {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #008f39;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }/* Hover per il pulsante */
+        #btnCarrello:hover {
+            background-color: #0b6730;
+        }
 
         /* Hover per il pulsante */
         #scarica-immagine:hover {
             background-color: #0056b3;
-        }
-
-        /* Stile per il pulsante */
-        #rimuovi-oggetto {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #FF0000;
-            color: #000;
-            border: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        /* Hover per il pulsante */
-        #rimuovi-oggetto:hover {
-            background-color: #CE3018;
         }
 
           #aggiungi-nome {
@@ -144,10 +108,12 @@
     </style>
     </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <img src="img/logo.png" alt="Logo del Sito" class="logo">
-            <h1 id="titolo">Personalizza la tua Tovaglietta</h1>
+    <header class="header">
+        <img src="img/logo.png" alt="Logo del Sito" class="logo">
+        <h1 id="title">Personalizza la tua Tovaglietta</h1>
+        <div class="cart-container">
+            <img src="img/carrello.png" alt="Carrello" class="cart-icon" onclick="vaiAlCheckout()">
+            <span id="conteggioCarrello" class="cart-count">0</span>
         </div>
     </header>
     <link rel="stylesheet" href="style.css">
@@ -163,31 +129,46 @@
             </div>
         </section>
         <!-- Popup iniziale -->
-    <div id="popupOverlay">
+    
+       <div id="popupOverlay" class="popupOverlay">
         <div id="popupContent">
             <h2>Pronto a creare una nuova tovaglietta?</h2>
             <p>Premi OK per iniziare a creare la tua tovaglietta personalizzata.</p>
-            <button onclick="closePopup()">OK</button>
+            <button onclick="closeBanner()">OK</button>
         </div>
-    </div>
+        </div>
+
+        <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Controlla se il banner è già stato mostrato
+        if (localStorage.getItem("welcomeBannerShown")) {
+            // Nasconde il banner se è già stato mostrato
+            document.getElementById("popupOverlay").classList.add("hidden");
+        } else {
+            // Mostra il banner e salva lo stato
+            document.getElementById("popupOverlay").classList.remove("hidden");
+        }
+    });
+
+    // Funzione per chiudere il banner
+    function closeBanner() {
+
+        document.getElementById("popupOverlay").classList.remove("show");
+
+        document.body.classList.remove('blurred');
+            const audio = document.getElementById('audioGuida');
+            audio.play().catch(error => {
+                console.log("Errore nell'avvio dell'audio:", error);
+            });
+    }
+</script>
+
     <audio id="audioGuida">
         <source src="voce_guida.mp3" type="audio/mpeg">
         Il tuo browser non supporta il tag audio.
     </audio>
     <script>
-        function closePopup() {
-            // Nasconde il popup
-            document.getElementById('popupOverlay').style.display = 'none';
-            // Rimuove l'effetto di offuscamento dalla pagina
-            document.body.classList.remove('blurred');
-            const audio = document.getElementById('audioGuida');
-            audio.play().catch(error => {
-                console.log("Errore nell'avvio dell'audio:", error);
-            });
-
-            // Nasconde il popup e rimuove l'overlay
-            //document.getElementById('overlay').style.display = 'none';
-        }
+        
     </script>
         <div>
         <label id="label1" for="nome-input">Inserisci il tuo nome:</label>
@@ -236,11 +217,11 @@
     <!-- Modal per visualizzare gli oggetti disponibili -->
      <div class="overlay" id="overlay"></div>
 
-        <div id="accessoriModal" class="modal">
+    	<div id="accessoriModal" class="modal">
             <div id="listaOggetti" class="oggetti-container">
-                
+            	
             </div>
-         </div> 
+   		 </div> 
 
         </section>
 <button id="rimuovi-oggetto">Rimuovi Oggetto Selezionato</button>
@@ -250,6 +231,44 @@
             <!--<p id="prezzoTotale">Prezzo totale: €<span id="prezzoTotaleValue">0.00</span></p>-->
 
             <button id="scarica-immagine">Scarica Immagine</button>
+            <!-- Pulsante Aggiungi al Carrello -->
+            <button id="btnCarrello" onclick="aggiungiArticolo()">Aggiungi al Carrello</button>
+    <script>
+        // Funzione per aggiungere la tovaglietta personalizzata al carrello e aprire la pagina di checkout
+        function aggiungiAlCarrello() {
+            // Prende il contenuto del canvas come immagine (base64)
+            const canvas = document.getElementById("tovaglietta-canvas");
+    if (canvas) {
+        const context = canvas.getContext("2d");
+
+        // Ottieni i dati di immagine dal canvas
+        const imgData = context.getImageData(0, 0, canvas.width, canvas.height).data;
+
+        // Verifica se tutti i pixel sono trasparenti
+        let isEmpty = true;
+        for (let i = 0; i < imgData.length; i += 4) {
+            if (imgData[i + 3] !== 0) { // Controlla il canale alpha per vedere se è trasparente
+                isEmpty = false;
+                break;
+            }
+        }
+
+        if (isEmpty) {
+            alert("Errore: Il contenuto è vuoto. Personalizza la tovaglietta prima di aggiungerla al carrello.");
+            return;
+        }
+
+        // Se il canvas non è vuoto, procedi con la conversione a Base64 e salvataggio
+        const imgBase64 = canvas.toDataURL("image/png");
+        localStorage.setItem("tovagliettaPersonalizzata", imgBase64);
+        
+
+        aggiornaConteggioCarrello()
+    } else {
+        alert("Errore: Aggiungi una tovaglietta per procedere.");
+    }
+        }
+    </script>
             <div id="canvas-container">
                 <canvas id="tovaglietta-canvas" width="300" height="300"></canvas>
             </div>
@@ -319,7 +338,7 @@ document.fonts.load('1em Pacifico').then(() => {
 
             // Controlla se la lingua non è impostata su italiano (it o it-IT)
             if (!linguaUtente.startsWith("it")) {
-                document.getElementById("titolo").textContent = "Personalized Placemat"; // Cambia il titolo in inglese
+                document.getElementById("title").textContent = "Personalized Placemat"; // Cambia il titolo in inglese
                 document.getElementById("testo").textContent = "Select a Placemat"; // Cambia il titolo in inglese
                 document.getElementById("testo2").textContent = "Select an Accessory"; // Cambia il titolo in inglese
                 document.getElementById("testo3").textContent = "Customize"; // Cambia il titolo in inglese
@@ -336,7 +355,7 @@ document.fonts.load('1em Pacifico').then(() => {
         rilevaLingua();
         
        function cambiaColoreTitolo() {
-            const titolo = document.getElementById('titolo');
+            const titolo = document.getElementById('title');
             const colori = ['#ff5733', '#33ff57', '#3357ff', '#ff33a1', '#a133ff', '#33ffd7'];
             let indice = 0;
 

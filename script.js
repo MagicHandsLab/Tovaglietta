@@ -2,7 +2,6 @@
 const canvas = new fabric.Canvas('tovaglietta-canvas');
 // Funzione per scaricare l'immagine del canvas
 const padding = 20; // Margine in pixel attorno all'immagine
-
 function resizeCanvas() {
     canvas.width = canvas.clientWidth;
     canvas.height = canvas.width * (img.height / img.width);
@@ -263,5 +262,97 @@ function rimuoviOggetto() {
     }
 }
 // Aggiorna il prezzo totale iniziale
-//aggiornaPrezzo();
+// Funzione per aggiungere un articolo al carrello
+let carrello = JSON.parse(localStorage.getItem('carrello')) || []; // Recupera il carrello dal localStorage o inizializza un array vuoto
 
+// Funzione per aggiungere la tovaglietta visualizzata nel canvas al carrello
+function aggiungiArticolo() {
+    const canvas = document.getElementById("tovaglietta-canvas");
+    if (canvas) {
+        const canvasImage = canvas.toDataURL("image/png"); // Converti il contenuto del canvas in una stringa Base64
+        const prezzo = 10.00; // Esempio di prezzo per una tovaglietta personalizzata, può essere dinamico se hai diversi prezzi
+        const context = canvas.getContext("2d");
+
+        // Ottieni i dati di immagine dal canvas
+        const imgData = context.getImageData(0, 0, canvas.width, canvas.height).data;
+
+        // Verifica se tutti i pixel sono trasparenti
+        let isEmpty = true;
+        for (let i = 0; i < imgData.length; i += 4) {
+            if (imgData[i + 3] !== 0) { // Controlla il canale alpha per vedere se è trasparente
+                isEmpty = false;
+                break;
+            }
+        }
+
+        if (isEmpty) {
+            alert("Errore: Il contenuto è vuoto. Personalizza la tovaglietta prima di aggiungerla al carrello.");
+            return;
+        }
+        // Aggiungi la tovaglietta al carrello
+        const tovaglietta = {
+            id: carrello.length + 1,
+            immagine: canvasImage,
+            prezzo: prezzo,
+        };
+        
+        carrello.push(tovaglietta); // Aggiungi al carrello
+        localStorage.setItem('carrello', JSON.stringify(carrello)); // Salva il carrello aggiornato nel localStorage
+        
+        aggiornaConteggioCarrello(); // Aggiorna il contatore del carrello
+        alert("Articolo aggiunto al carrello!");
+    } else {
+        alert("Errore: canvas non trovato.");
+    }
+}
+
+// Funzione per gestire il click sul bottone del carrello
+function vaiAlCheckout() {
+    const carrelloSalvato = JSON.parse(localStorage.getItem('carrello')) || [];
+
+    if (carrelloSalvato > 0) {
+        // Se ci sono articoli nel carrello, vai alla pagina di checkout
+        window.location.href = "checkout.html";
+    } else {
+        // Altrimenti mostra un messaggio di errore
+        window.location.href = "checkout.html";
+       // alert("Il carrello è vuoto. Aggiungi articoli prima di procedere al checkout.");
+    }
+}
+function aggiornaConteggioCarrello() {
+    const conteggioElement = document.getElementById("conteggioCarrello");
+    const conteggioTotale = carrello.length;
+    conteggioElement.textContent = conteggioTotale;
+}
+// Inizializza il conteggio al caricamento della pagina
+document.addEventListener("DOMContentLoaded", () => {
+    carrello = JSON.parse(localStorage.getItem('carrello')) || [];
+    aggiornaConteggioCarrello();
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Controlla se il banner è già stato mostrato in questa sessione
+    if (!sessionStorage.getItem("bannerShown")) {
+        // Mostra il banner aggiungendo la classe "show"
+        const banner = document.getElementById("popupOverlay");
+        banner.classList.add("show");
+
+        // Imposta il flag per indicare che il banner è stato mostrato
+        sessionStorage.setItem("bannerShown", "true");
+    }
+});
+
+
+function closePopup() {
+            // Nasconde il popup
+            document.getElementById('popupOverlay').style.display = 'none';
+            // Rimuove l'effetto di offuscamento dalla pagina
+            document.body.classList.remove('blurred');
+            const audio = document.getElementById('audioGuida');
+            audio.play().catch(error => {
+                console.log("Errore nell'avvio dell'audio:", error);
+            });
+
+            // Nasconde il popup e rimuove l'overlay
+            //document.getElementById('overlay').style.display = 'none';
+        }

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.paypal.com/sdk/js?client-id=AV2EOV_NJ3C3s3YYxsIkijyA9dLbR9SiylClgL8GDBPFPbnrWCZkK2z2M8UGAvGgdFDht8yDUTwTAx6d&currency=EUR"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B7WMPCF911"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B7WMPCF911');
+</script>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    </head>
+    <title>Checkout - Completa il tuo ordine</title>
+    <style>
+        /* Stili di base per la pagina */
+        
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .order-summary, .shipping-form {
+            margin-bottom: 20px;
+        }
+
+        .order-summary img {
+            width: 100%;
+            max-width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .order-summary h2 {
+            text-align: center;
+        }
+
+        .summary-details, .shipping-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+
+        .total-price {
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .btn-confirm {
+            width: 100%;
+            padding: 15px;
+            background-color: #28a745;
+            color: white;
+            font-size: 1em;
+            font-weight: bold;
+            text-align: center;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .btn-confirm:hover {
+            background-color: #218838;
+        }
+        /* Stile per il pulsante */
+        #rimuovi-oggetto {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #FF0000;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        /* Hover per il pulsante */
+        #rimuovi-oggetto:hover {
+            background-color: #CE3018;
+        }
+
+    </style>
+
+<body>
+    <div class="container">
+    	<div class="checkout-header">
+    
+    <div class="back-home-icon" onclick="window.location.href='index.html';">
+        <img src="img/homeicon.png" alt="Back to Home">
+    </div>
+    <div class="checkout-title">
+        Riepilogo Carrello
+    </div>
+</div>
+
+        <!-- Riepilogo dell'ordine -->
+        <div class="order-summary">
+           
+    <div id="elencoCarrello"></div>
+    <h2 id="totaleCarrello"></h2>
+    <script src="checkout.js"></script>
+        <!-- Modulo di spedizione e pagamento -->
+
+    </div>
+<div id="paypal-button-container"></div>
+    <script>
+        // Funzione per caricare l'immagine della tovaglietta dal carrello
+      // document.addEventListener("DOMContentLoaded", function () {
+      //      const imgData = localStorage.getItem("tovagliettaPersonalizzata");
+      //      if (imgData) {
+      //          document.getElementById("tovagliettaImage").src = imgData;
+      //      }
+      //  });
+
+        // Funzione per completare l'ordine
+        function completaOrdine() {
+            alert("Ordine completato con successo!");
+            localStorage.removeItem("tovagliettaPersonalizzata"); // Rimuove dal carrello
+            window.location.href = "ordine-completato.html"; // Reindirizza a pagina di conferma
+        }
+
+ function tornaAllaHome() {
+    window.location.href = "index.html";  // Cambia "index.html" con il nome della tua pagina home, se diverso
+}
+    </script>
+    
+</body>
+</html>

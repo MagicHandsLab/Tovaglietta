@@ -1,4 +1,52 @@
-//* Layout di default per desktop */
+ #paypal-button-container {
+    display: none; /* Nasconde completamente il pulsante */
+}
+ /* Stile per il popup */
+        .popupOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Sfondo scuro semitrasparente */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .hidden {
+            display: none; /* Nascondi il banner */
+        }
+
+        #popupContent {
+            background: white;
+            padding: 2em;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #popupContent h2 {
+            margin-top: 0;
+        }
+
+        #popupContent button {
+            margin-top: 1em;
+            padding: 0.5em 1.5em;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+#popupOverlay {
+    display: none; /* Nascondi il banner di default */
+}
+
+#popupOverlay.show {
+    display: block; /* Mostra il banner solo se necessario */
+}
+
+
+        //* Layout di default per desktop */
 .container {
     display: flex;
     flex-direction: row;
@@ -6,28 +54,84 @@
     justify-content: center;
     gap: 20px;
 }
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Sfondo scuro semi-trasparente */
-    display: none; /* Nascondi di default */
 
-    z-index: 999; /* Assicura che sia sopra altri contenuti */
+/* Contenitore del carrello */
+.carrello-container {
+    position: relative;
 }
-/* Stile per l'header e contenitore del logo */
-header {
-    padding: 20px;
-    background-color: transparent;
+
+/* Stile del bottone del carrello */
+.carrello-bottone {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    padding: 0;
+}
+
+/* Icona del carrello */
+.carrello-bottone img {
+    width: 30px;
+    height: 30px;
+}
+
+
+/* Stile per l'header e contenitore del hom */
+.header {
+    display: flex;
+    align-items: center; /* Allinea gli elementi verticalmente al centro */
+    justify-content: space-between; /* Spinge gli elementi agli estremi */
+    padding: 10px;
+    width: 100%; /* Assicura che l'header occupi tutta la larghezza */
+    box-sizing: border-box; /* Include padding nella larghezza totale */
+    overflow: hidden; /* Previene lo scroll orizzontale */
+    margin-top: 30px; 
+}
+/* Titolo centrale */
+.title {
+    flex: 1; /* Occupa lo spazio disponibile tra logo e carrello */
+    font-size: 24px; /* Dimensione del testo */
+    margin: 0;
+    text-align: center; /* Centra il titolo */
+
+}
+
+/* Contenitore del carrello a destra */
+.cart-container {
+    position: relative;
+    display: flex;
+    align-items: center; /* Centra il contenuto del carrello */
+    justify-content: center;
+    margin-left: 30px; /* Riduce lo spazio tra titolo e carrello */
+
+}
+
+/* Icona del carrello */
+.cart-icon {
+    height: 30px; /* Dimensione dell'icona */
+    cursor: pointer;
+}
+
+/* Badge per il conteggio degli articoli nel carrello */
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%; /* Rende il badge circolare */
+    width: 20px; /* Larghezza uguale all'altezza */
+    height: 20px; /* Altezza uguale alla larghezza */
+    display: flex; /* Per centrare il testo */
+    align-items: center; /* Centra verticalmente il testo */
+    justify-content: center; /* Centra orizzontalmente il testo */
+    font-size: 12px; /* Dimensione del testo */
+    font-weight: bold; /* Rende il testo più visibile */
+    line-height: 1; /* Evita spaziature extra nel testo */
 }
 
 /* Contenitore per allineare il logo e il titolo orizzontalmente */
-.logo-container {
-    display: flex;
-    align-items: center;
-}
+
 
 /* Stile per il logo circolare */
 .logo {
@@ -124,21 +228,26 @@ header, main {
     display: block;
 }
 
-#seleziona-tovaglietta, #seleziona-accessorio, #personalizza, #rimuovi-oggetto {
+#seleziona-tovaglietta, #seleziona-accessorio, #personalizza, #rimuovi-oggetto{
     margin-top: 20px;
     text-align: center;
 }
+
 #rimuovi-oggetto {
-    display: block;
-    margin: 20px auto; /* Imposta il margine automatico orizzontale */
-    padding: 10px 20px;
-    background-color: red;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            cursor: pointer;
+            background-color: #FF0000;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        /* Hover per il pulsante */
+        #rimuovi-oggetto:hover {
+            background-color: #CE3018;
+        }
 #aggiungi-nome {
     display: block;
     margin: 20px auto; /* Imposta il margine automatico orizzontale */
@@ -265,13 +374,13 @@ header, main {
     margin-bottom: 15px; /* Spazio tra gli oggetti e il bottone */
 }
 .custom-textbox {
-    height: 20px; /* Altezza della textbox */
-    width: 200px;
-    padding: 10px; /* Spaziatura interna */
-    font-size: 15px; /* Dimensione del font nella textbox */
+    width: 90%; /* Larghezza desiderata */
+    height: 40px; /* Altezza desiderata */
+    padding: 5px; /* Spaziatura interna */
+    font-size: 14px; /* Dimensione del testo */
     border: 1px solid #ccc; /* Bordo della textbox */
     border-radius: 5px; /* Angoli arrotondati */
-    transition: border-color 0.3s; /* Transizione per il cambio del bordo */
+    box-sizing: border-box; /* Include padding nel calcolo della larghezza */
 }
 .custom-textbox:focus {
     border-color: #007BFF; /* Colore del bordo quando la textbox è attiva */
@@ -287,4 +396,29 @@ header, main {
 
 .oggetti-container img:hover {
     transform: scale(1.1); /* Ingrandisce l'oggetto al passaggio del mouse */
+}
+.checkout-header {
+    display: flex; /* Usa Flexbox per disporre gli elementi sulla stessa riga */
+    justify-content: center; /* Centra orizzontalmente gli elementi */
+    align-items: center; /* Allinea verticalmente gli elementi al centro */
+    width: 100%; /* Occupa tutta la larghezza */
+    padding: 20px; /* Padding per separare gli elementi dai bordi */
+}
+
+/* Icona "Back Home" */
+.back-home-icon {
+    cursor: pointer; /* Mostra il cursore cliccabile */
+}
+
+.back-home-icon img {
+    height: 40px; /* Imposta l'altezza dell'icona */
+    width: 40px; /* Imposta la larghezza dell'icona */
+}
+
+/* Titolo della pagina */
+.checkout-title {
+    font-size: 24px; /* Imposta la dimensione del titolo */
+    text-align: center; /* Centra il testo */
+    margin: 0; /* Rimuove margini */
+    flex-grow: 1; /* Permette al titolo di espandersi per occupare tutto lo spazio disponibile */
 }
