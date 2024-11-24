@@ -68,8 +68,7 @@ body.index-page .header h1 {
     align-items: center;
     justify-content: space-between; /* Spazio tra gli elementi */
     padding: 10px 20px;
-    background-color: transparent;
-   
+    background-color: transparent;  
 }
 /* Stile per il titolo */
 #title1 {
@@ -94,7 +93,6 @@ body.index-page .header h1 {
     cursor: pointer;
     font-size: 24px;
 }
-
 
 /* Stile per il menu laterale */
 .sidebar {
@@ -201,6 +199,10 @@ body.index-page .header h1 {
 
 /* Layout per dispositivi mobili */
 @media (max-width: 768px) {
+    .header {
+        align-items: center; /* Centra gli elementi */
+        gap: 10px; /* Spaziatura tra gli elementi */
+    }
    #title {
         font-size: 20px; /* Riduce la dimensione del titolo */
         white-space: normal; /* Permette al titolo di andare a capo */
@@ -228,7 +230,6 @@ body.index-page .header h1 {
     }
 
 }
-
 
 body {
     font-family: 'Pacifico';
