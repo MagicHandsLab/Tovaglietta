@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <link rel="stylesheet" href="css/style.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B7WMPCF911"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B7WMPCF911');
+</script>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contatti</title>
+
+</head>
+ <body>
+<header>
+     <div class="logo-container">
+            <img src="img/logo.png" alt="Logo del sito" class="logo">
+        </div>
+    <div class="header">
+        <a href="index.html" class="back-home-icon">
+            <img src="img/homeicon.png" alt="Home" class="icon">
+        </a>
+        <h1>Contattaci</h1>
+        <div class="cart-container">
+                <img src="img/carrello.png" alt="Carrello" class="cart-icon" onclick="vaiAlCheckout()">
+                <span id="conteggioCarrello" class="cart-count">0</span>
+            </div>
+    </div>
+</header>
+
+    <main class="contact-page">
+        <section class="contact-info">
+            <h2>Informazioni di Contatto</h2>
+            <p>Per qualsiasi domanda, puoi contattarci tramite mail:</p>
+            <ul>
+                <li><strong>Email:</strong> magichandslab01@gmail.com</li>
+            </ul>
+        </section>
+
+        <section class="contact-form">
+            <h2>Scrivici</h2>
+            <form action="mailto:magichandslab01@gmail.com" method="post" enctype="text/plain">
+                <div class="form-group">
+                    <label for="name">Nome</label>
+                    <input type="text" id="name" name="name" placeholder="Inserisci il tuo nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Inserisci la tua email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Messaggio</label>
+                    <textarea id="message" name="message" placeholder="Scrivi il tuo messaggio" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn">Invia</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 MagicHandsLab. Tutti i diritti riservati.</p>
+    </footer>
+<script src="checkout.js" defer></script>
+
+</body>
+</html>

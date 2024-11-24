@@ -55,105 +55,142 @@
     gap: 20px;
 }
 
-/* Contenitore del carrello */
-.carrello-container {
-    position: relative;
-}
 
-/* Stile del bottone del carrello */
-.carrello-bottone {
-    background: none;
-    border: none;
-    cursor: pointer;
-    position: relative;
-    padding: 0;
+.header h1 {
+    white-space: nowrap;
 }
-
-/* Icona del carrello */
-.carrello-bottone img {
-    width: 30px;
-    height: 30px;
+body.index-page .header h1 {
+    margin-right: 10px; /* Corregge eventuale spazio mancante */
 }
 
 
-/* Stile per l'header e contenitore del hom */
+/* Stile per il contenitore dell'header */
 .header {
     display: flex;
-    align-items: center; /* Allinea gli elementi verticalmente al centro */
-    justify-content: space-between; /* Spinge gli elementi agli estremi */
-    padding: 10px;
-    width: 100%; /* Assicura che l'header occupi tutta la larghezza */
-    box-sizing: border-box; /* Include padding nella larghezza totale */
-    overflow: hidden; /* Previene lo scroll orizzontale */
-    margin-top: 30px; 
+    align-items: center;
+    justify-content: space-between; /* Spazio tra gli elementi */
+    padding: 10px 20px;
+    background-color: transparent;
 }
-/* Titolo centrale */
-.title {
-    flex: 1; /* Occupa lo spazio disponibile tra logo e carrello */
-    font-size: 24px; /* Dimensione del testo */
-    margin: 0;
-    text-align: center; /* Centra il titolo */
-
-}
-
-/* Contenitore del carrello a destra */
-.cart-container {
-    position: relative;
+/* Contenuto dell'header */
+.header-content {
     display: flex;
-    align-items: center; /* Centra il contenuto del carrello */
-    justify-content: center;
-    margin-left: 30px; /* Riduce lo spazio tra titolo e carrello */
-
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
 }
 
-/* Icona del carrello */
+/* Stile per pulsanti del menu */
+.open-btn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+
+/* Stile per il menu laterale */
+.sidebar {
+    position: absolute; /* Sovrappone il menu a sinistra */
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 250px;
+    background-color: #333;
+    color: white;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 20px;
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+
+.close-btn {
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 20px;
+    display: block;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 5;
+}
+
+.overlay.show {
+    display: block;
+}
+
+/* Stile per il contenitore del carrello */
+.cart-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
 .cart-icon {
-    height: 30px; /* Dimensione dell'icona */
+    width: 30px; /* Dimensione dell'icona */
     cursor: pointer;
 }
 
-/* Badge per il conteggio degli articoli nel carrello */
 .cart-count {
-    position: absolute;
-    top: -5px;
-    right: -10px;
-    background-color: red;
-    color: white;
-    border-radius: 50%; /* Rende il badge circolare */
-    width: 20px; /* Larghezza uguale all'altezza */
-    height: 20px; /* Altezza uguale alla larghezza */
-    display: flex; /* Per centrare il testo */
-    align-items: center; /* Centra verticalmente il testo */
-    justify-content: center; /* Centra orizzontalmente il testo */
-    font-size: 12px; /* Dimensione del testo */
-    font-weight: bold; /* Rende il testo più visibile */
-    line-height: 1; /* Evita spaziature extra nel testo */
+    position: absolute;         /* Posiziona il badge sopra l'icona */
+    top: -5px;                  /* Posizione verticale */
+    right: -10px;               /* Posizione orizzontale */
+    background-color: red;      /* Colore di sfondo del badge */
+    color: white;               /* Colore del testo */
+    font-size: 12px;            /* Dimensione del testo */
+    font-weight: bold;          /* Testo in grassetto */
+    border-radius: 50%;         /* Rende il badge circolare */
+    width: 20px;                /* Larghezza del badge */
+    height: 20px;               /* Altezza del badge */
+    display: flex;              /* Usato per centrare il testo */
+    align-items: center;        /* Centra verticalmente il testo */
+    justify-content: center;    /* Centra orizzontalmente il testo */
+    padding: 0;         
 }
-
-/* Contenitore per allineare il logo e il titolo orizzontalmente */
-
 
 /* Stile per il logo circolare */
 .logo {
-    width: 40px; /* Dimensione del logo */
-    height: 40px;
+    width: 60px; /* Dimensione del logo */
+    height: 60px;
     border-radius: 50%; /* Rende l'immagine circolare */
     margin-right: 10px; /* Spazio tra logo e titolo */
     object-fit: cover; /* Copre l'intera area circolare senza distorsioni */
 }
 
 /* Stile per il titolo */
-.logo-container h1 {
-    font-size: 24px;
-    color: #333;
+.logo-container  {
+    text-align: center; /* Centra orizzontalmente il logo */
+
 }
-h1 {
-        font-size: 1.5rem; /* Dimensione del titolo ridotta per mobile */
-        text-align: center;
-            position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    }
+
 
 /* Layout per dispositivi mobili */
 @media (max-width: 768px) {
@@ -178,12 +215,6 @@ h1 {
         margin-top: 10px;
     }
 
-    h1 {
-        font-size: 1.5rem; /* Dimensione del titolo ridotta per mobile */
-        text-align: center;
-    }
-
-
 }
 
 
@@ -193,8 +224,7 @@ body {
     flex-direction: column;
     align-items: center;
 }
-
-header, main {
+main {
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
@@ -261,7 +291,7 @@ header, main {
 }
 
 
-#tovagliette-lista img, #listaOggetti img {
+#tovagliette-lista img{
     width: 80px;
     margin: 10px;
     cursor: pointer;
@@ -315,21 +345,7 @@ header, main {
     
 </style>
 
-<style>
-@font-face {
-        font-family: 'PlaywriteGBS';
-        src: url('PlaywriteGBS.ttf') format('truetype'); /* Modifica il percorso se necessario */
-    }
-    .color-picker {
-        display: inline-block;
-        width: 30px;  /* Maggiore larghezza per una migliore visibilità */
-        height: 30px; /* Maggiore altezza per una migliore visibilità */
-        margin: 5px;  /* Maggiore margine per evitare sovrapposizioni */
-        cursor: pointer;
-        border: 1px solid #ccc; /* Bordo per delimitare il colore */
-        border-radius: 5px;     /* Bordo arrotondato per un aspetto migliore */
-    }
-</style>
+
 /* Stile per il modal */
 .modal {
     display: flex;

@@ -35,7 +35,7 @@
     "fiore": [
         { "nome": "fiore1", "immagine": "img/fiore1.png", "quantità": 2 },
         { "nome": "fiore2", "immagine": "img/fiore2.png", "quantità": 5 },
-        { "nome": "fiore3", "immagine": "img/fiore3.png", "quantità": 3 }
+        { "nome": "fiore3", "immagine": "img/fiore3.png", "quantità": 4 }
     ],
     "fioreB": [
         { "nome": "fioreB1", "immagine": "img/fioreB1.png", "quantità": 5 },

@@ -2,6 +2,7 @@
 <html lang="it">
 <head>
 <link rel="icon" href="img/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="style.css">
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B7WMPCF911"></script>
@@ -13,6 +14,7 @@
 </script>
     <meta charset="UTF-8">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
@@ -70,7 +72,7 @@
             border-radius: 5px;
             transition: background-color 0.3s;
         }/* Hover per il pulsante */
-        #btnCarrello:hover {
+        #c:hover {
             background-color: #0b6730;
         }
 
@@ -108,24 +110,37 @@
     </style>
     </head>
 <body>
-    <header class="header">
-        <img src="img/logo.png" alt="Logo del Sito" class="logo">
-        <h1 id="title">Personalizza la tua Tovaglietta</h1>
+<header>
+    <div class="logo-container">
+        <img src="img/logo.png" alt="Logo del sito" class="logo">
+    </div>
+    <div class="header">
+    	<button class="open-btn" onclick="apriMenu()">☰</button>
+    	<div id="sidebar" class="sidebar">
+   			<button class="close-btn" onclick="chiudiMenu()">✖</button>
+    		<ul>
+        		<li><a href="natale.html">Natale</a></li>
+        		<li><a href="checkout.html">Carrello</a></li>
+        		<li><a href="contatti.html">Contatti</a></li>
+    		</ul>
+		</div>
+      	<h1 id="title1">Personalizza la tua Tovaglietta</h1>
         <div class="cart-container">
             <img src="img/carrello.png" alt="Carrello" class="cart-icon" onclick="vaiAlCheckout()">
-            <span id="conteggioCarrello" class="cart-count">0</span>
+            <span id="conteggioCarrello" class="cart-count"></span>
         </div>
-    </header>
-    <link rel="stylesheet" href="style.css">
+    </div>
+</header>
+
     <main>
         <!-- Sezione per la scelta delle tovagliette -->
         <section id="seleziona-tovaglietta">
             <h2 testo>Seleziona una Tovaglietta</h2>
             <div id="tovagliette-lista">
                 <!-- Lista delle tovagliette con immagini cliccabili -->
-                <img src="tovaglietta1.png" alt="Tovaglietta 1" onclick="selezionaTovaglietta('tovaglietta1.png')">
-                <img src="tovaglietta2.png" alt="Tovaglietta 2" onclick="selezionaTovaglietta('tovaglietta2.png')">
-                <img src="tovaglietta3.png" alt="Tovaglietta 3" onclick="selezionaTovaglietta('tovaglietta3.png')">
+                <img src="img/tovaglietta1.png" alt="Tovaglietta 1" onclick="selezionaTovaglietta('img/tovaglietta1.png')">
+                <img src="img/tovaglietta2.png" alt="Tovaglietta 2" onclick="selezionaTovaglietta('img/tovaglietta2.png')">
+                <img src="img/tovaglietta3.png" alt="Tovaglietta 3" onclick="selezionaTovaglietta('img/tovaglietta3.png')">
             </div>
         </section>
         <!-- Popup iniziale -->
@@ -187,15 +202,17 @@
         <div class="color-picker" style="background-color: #FFFD2E;" onclick="selezionaColore('#FFFD2E')"></div>
         <div class="color-picker" style="background-color: #F597AF;" onclick="selezionaColore('#F597AF')"></div>
         <div class="color-picker" style="background-color: #EA00AC;" onclick="selezionaColore('#EA00AC')"></div>
-        <div class="color-picker" style="background-color: #DC2394;" onclick="selezionaColore('#DC2394')"></div>
+        <div class="color-picker" style="background-color: #AD96DC;" onclick="selezionaColore('#AD96DC')"></div>
         <div class="color-picker" style="background-color: #BD00F1;" onclick="selezionaColore('#BD00F1')"></div>
         <div class="color-picker" style="background-color: #5ED3B3;" onclick="selezionaColore('#5ED3B3')"></div>
-        <div class="color-picker" style="background-color: #57B9A8;" onclick="selezionaColore('#57B9A8')"></div>
-        <div class="color-picker" style="background-color: #1BA564;" onclick="selezionaColore('#1BA564')"></div>
-        <div class="color-picker" style="background-color: #1774A2;" onclick="selezionaColore('#1774A2')"></div>
-        <div class="color-picker" style="background-color: #1F52D3;" onclick="selezionaColore('#1F52D3')"></div>
+        <div class="color-picker" style="background-color: #8c9d52;" onclick="selezionaColore('#8c9d52')"></div>
+        <div class="color-picker" style="background-color: #27893e;" onclick="selezionaColore('#27893e')"></div>
+        <div class="color-picker" style="background-color: #006d5b;" onclick="selezionaColore('#006d5b')"></div>
+        <div class="color-picker" style="background-color: #8BB8E8;" onclick="selezionaColore('#8BB8E8')"></div>
+        <div class="color-picker" style="background-color: #0072CE;" onclick="selezionaColore('#0072CE')"></div>
         <div class="color-picker" style="background-color: #0523EC;" onclick="selezionaColore('#0523EC')"></div>
         <div class="color-picker" style="background-color: #6F9CA4;" onclick="selezionaColore('#6F9CA4')"></div>
+        <div class="color-picker" style="background-color: #653818;" onclick="selezionaColore('#653818')"></div>
         <div class="color-picker" style="background-color: #0A0F18;" onclick="selezionaColore('#0A0F18')"></div>
         <div class="color-picker" style="background-color: #FF2600;" onclick="selezionaColore('#FF2600')"></div>
     </div>
@@ -235,9 +252,9 @@
             <button id="btnCarrello" onclick="aggiungiArticolo()">Aggiungi al Carrello</button>
     <script>
         // Funzione per aggiungere la tovaglietta personalizzata al carrello e aprire la pagina di checkout
-        function aggiungiAlCarrello() {
+function aggiungiAlCarrello() {
             // Prende il contenuto del canvas come immagine (base64)
-            const canvas = document.getElementById("tovaglietta-canvas");
+    const canvas = document.getElementById("tovaglietta-canvas");
     if (canvas) {
         const context = canvas.getContext("2d");
 
@@ -261,8 +278,6 @@
         // Se il canvas non è vuoto, procedi con la conversione a Base64 e salvataggio
         const imgBase64 = canvas.toDataURL("image/png");
         localStorage.setItem("tovagliettaPersonalizzata", imgBase64);
-        
-
         aggiornaConteggioCarrello()
     } else {
         alert("Errore: Aggiungi una tovaglietta per procedere.");
@@ -338,7 +353,7 @@ document.fonts.load('1em Pacifico').then(() => {
 
             // Controlla se la lingua non è impostata su italiano (it o it-IT)
             if (!linguaUtente.startsWith("it")) {
-                document.getElementById("title").textContent = "Personalized Placemat"; // Cambia il titolo in inglese
+                document.getElementById("title1").textContent = "Personalized Placemat"; // Cambia il titolo in inglese
                 document.getElementById("testo").textContent = "Select a Placemat"; // Cambia il titolo in inglese
                 document.getElementById("testo2").textContent = "Select an Accessory"; // Cambia il titolo in inglese
                 document.getElementById("testo3").textContent = "Customize"; // Cambia il titolo in inglese
@@ -355,7 +370,7 @@ document.fonts.load('1em Pacifico').then(() => {
         rilevaLingua();
         
        function cambiaColoreTitolo() {
-            const titolo = document.getElementById('title');
+            const titolo = document.getElementById('title1');
             const colori = ['#ff5733', '#33ff57', '#3357ff', '#ff33a1', '#a133ff', '#33ffd7'];
             let indice = 0;
 
@@ -368,7 +383,9 @@ document.fonts.load('1em Pacifico').then(() => {
         // Inizializza il cambiamento di colore del titolo all'avvio
         cambiaColoreTitolo();
     </script>
-
+<footer class="footer">
+        <p>&copy; 2024 MagicHandsLab. Tutti i diritti riservati.</p>
+    </footer>
  <script src="script.js"></script>
 </body>
 </html>

@@ -1,3 +1,10 @@
+
+let carrello = JSON.parse(localStorage.getItem('carrello')) || []; // Recupera il carrello dal localStorage o inizializza un array vuoto
+// Inizializza il conteggio al caricamento della pagina
+document.addEventListener("DOMContentLoaded", () => {
+    carrello = JSON.parse(localStorage.getItem('carrello')) || [];
+    aggiornaConteggioCarrello();
+});
 // Inizializza il canvas di Fabric.js
 const canvas = new fabric.Canvas('tovaglietta-canvas');
 // Funzione per scaricare l'immagine del canvas
@@ -263,7 +270,6 @@ function rimuoviOggetto() {
 }
 // Aggiorna il prezzo totale iniziale
 // Funzione per aggiungere un articolo al carrello
-let carrello = JSON.parse(localStorage.getItem('carrello')) || []; // Recupera il carrello dal localStorage o inizializza un array vuoto
 
 // Funzione per aggiungere la tovaglietta visualizzata nel canvas al carrello
 function aggiungiArticolo() {
@@ -319,16 +325,13 @@ function vaiAlCheckout() {
        // alert("Il carrello è vuoto. Aggiungi articoli prima di procedere al checkout.");
     }
 }
+
 function aggiornaConteggioCarrello() {
     const conteggioElement = document.getElementById("conteggioCarrello");
     const conteggioTotale = carrello.length;
     conteggioElement.textContent = conteggioTotale;
 }
-// Inizializza il conteggio al caricamento della pagina
-document.addEventListener("DOMContentLoaded", () => {
-    carrello = JSON.parse(localStorage.getItem('carrello')) || [];
-    aggiornaConteggioCarrello();
-});
+
 
 document.addEventListener("DOMContentLoaded", function () {
     // Controlla se il banner è già stato mostrato in questa sessione
@@ -342,17 +345,65 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+function apriMenu() {
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
 
-function closePopup() {
-            // Nasconde il popup
-            document.getElementById('popupOverlay').style.display = 'none';
-            // Rimuove l'effetto di offuscamento dalla pagina
-            document.body.classList.remove('blurred');
-            const audio = document.getElementById('audioGuida');
-            audio.play().catch(error => {
-                console.log("Errore nell'avvio dell'audio:", error);
-            });
+    sidebar.classList.add("open");
+    overlay.style.display = "block"; // Mostra l'overlay
+}
 
-            // Nasconde il popup e rimuove l'overlay
-            //document.getElementById('overlay').style.display = 'none';
+function chiudiMenu() {
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+
+    sidebar.classList.remove("open");
+    overlay.style.display = "none"; // Nascondi l'overlay
+}
+function cambiaColoreTitolo() {
+            const titolo = document.getElementById('title1');
+            const colori = ['#ff5733', '#33ff57', '#3357ff', '#ff33a1', '#a133ff', '#33ffd7'];
+            let indice = 0;
+
+            setInterval(() => {
+                titolo.style.color = colori[indice]; // Cambia il colore del titolo
+                indice = (indice + 1) % colori.length; // Passa al colore successivo
+            }, 1000); // Cambia colore ogni 1000 millisecondi (1 secondo)
         }
+
+        // Inizializza il cambiamento di colore del titolo all'avvio
+cambiaColoreTitolo();
+// Recupera il carrello da localStorage
+function getCarrello() {
+    return JSON.parse(localStorage.getItem("carrello")) || [];
+}
+
+// Salva il carrello in localStorage
+function setCarrello(carrello) {
+    localStorage.setItem("carrello", JSON.stringify(carrello));
+}
+
+// Aggiunge un prodotto al carrello
+function aggiungiAlCarrello(prodotto) {
+    let carrello = JSON.parse(localStorage.getItem("carrello")) || [];
+    carrello.push(prodotto);
+    localStorage.setItem("carrello", JSON.stringify(carrello));
+    aggiornaBadgeCarrello();
+}
+
+
+// Aggiorna il badge con il conteggio articoli
+function aggiornaBadgeCarrello() {
+    const badge = document.getElementById("conteggioCarrello");
+    const carrello = getCarrello();
+    badge.textContent = carrello.length;
+}
+function aggiungiProdottoNatale(nome, prezzo, immagine) {
+    const prodotto = {
+        nome: nome,
+        prezzo: prezzo,
+        immagine: immagine,
+    };
+    aggiungiAlCarrello(prodotto);
+    alert(`${nome} è stato aggiunto al carrello!`);
+}

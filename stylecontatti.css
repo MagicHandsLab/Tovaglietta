@@ -1,0 +1,37 @@
+/* Header generale */
+.header {
+    background-color: #0078d7;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Contenuto dell'header */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Titolo e icona allineati a sinistra */
+    width: 100%; /* Prende tutta la larghezza */
+}
+
+/* Stile per l'icona Home */
+.home-icon {
+    display: inline-block;
+    margin-right: 10px; /* Spazio tra icona e titolo */
+}
+
+.home-icon .icon {
+    width: 30px; /* Dimensione dell'icona */
+    height: 30px;
+}
+
+/* Stile per il titolo */
+.header-title {
+    font-size: 24px;
+    margin: 0;
+    flex-grow: 1; /* Permette al titolo di occupare lo spazio rimanente */
+    text-align: left; /* Allinea il titolo a sinistra */
+}

@@ -1,0 +1,323 @@
+/* css/style.css */
+/* Stile per il logo circolare */
+ #paypal-button-container {
+    display: none; /* Nasconde completamente il pulsante */
+}
+/* Centra il logo sopra l'header */
+.logo-container {
+    text-align: center; /* Centra orizzontalmente il logo */
+}
+.logo {
+    text-align: center; /* Centra orizzontalmente il logo */
+    width: 60px; /* Dimensione del logo */
+    height: 60px;
+    border-radius: 50%; /* Rende l'immagine circolare */
+    margin-right: 10px; /* Spazio tra logo e titolo */
+    object-fit: cover; /* Copre l'intera area circolare senza distorsioni */
+}
+/* Stile per l'header */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Spazio tra gli elementi */
+    padding: 10px 20px;
+    background-color: transparent;
+}
+
+/* Contenuto dell'header */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+/* Stile per l'icona Home */
+.back-home-icon {
+    cursor: pointer; /* Mostra il cursore cliccabile */
+}
+
+.back-home-icon img {
+    height: 40px; /* Imposta l'altezza dell'icona */
+    width: 40px; /* Imposta la larghezza dell'icona */
+}
+
+/* Stile per il titolo */
+.header-title {
+   flex: 1; /* Permette al titolo di occupare lo spazio centrale */
+    text-align: center; /* Centra il testo */
+    margin: 0; /* Rimuove margini extra */
+    font-size: 24px;
+}
+
+/* Modulo di contatto */
+.contact-page {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+}
+
+/* Modulo di contatto */
+.contact-form h2 {
+    font-size: 20px;
+    color: #0078d7;
+    margin-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Pulsante di invio */
+.btn {
+    display: inline-block;
+    background-color: #0078d7;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #005bb5;
+}
+
+/* Griglia dei prodotti */
+.product-grid {
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.grid-container {
+ display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adatta il numero di colonne automaticamente */
+    gap: 10px; /* Spazio tra gli elementi */
+    padding: 10px;
+    justify-content: center;
+}
+
+.product {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.product:hover {
+    transform: scale(1.05);
+}
+
+.product-image {
+    width: 200;
+    max-width: 200px;
+    height: 200;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.product p {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.add-to-cart-btn {
+    background-color: #0078d7;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #005bb5;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 10px;
+    background-color: transparent;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Aggiungi un po' di padding ai bottoni */
+.add-to-cart-btn {
+    padding: 12px 20px;
+    font-size: 16px;
+}
+/* Media queries per schermi più piccoli */
+
+/* Quando la larghezza dello schermo è inferiore a 768px (tablet e mobile) */
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Colonne più strette */
+    }
+
+    .header-title {
+        font-size: 15px; /* Riduci la dimensione del titolo */
+    }
+
+    .product {
+        padding: 10px;
+    }
+
+    .product p {
+        font-size: 16px;
+    }
+
+    .add-to-cart-btn {
+        font-size: 14px;
+    }
+}
+
+/* Quando la larghezza dello schermo è inferiore a 480px (mobile) */
+@media (max-width: 480px) {
+    .grid-container {
+        grid-template-columns: 1fr; /* Una sola colonna */
+    }
+
+    .header-title {
+        font-size: 12px; /* Riduci ulteriormente la dimensione del titolo */
+    }
+
+    .product {
+        padding: 8px;
+    }
+
+    .product p {
+        font-size: 14px;
+    }
+
+    .add-to-cart-btn {
+        font-size: 12px;
+    }
+}
+/* Stile per il contenitore del carrello */
+.cart-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.cart-icon {
+    width: 30px; /* Dimensione dell'icona */
+    cursor: pointer;
+}
+
+.cart-count {
+    position: absolute;         /* Posiziona il badge sopra l'icona */
+    top: -5px;                  /* Posizione verticale */
+    right: -10px;               /* Posizione orizzontale */
+    background-color: red;      /* Colore di sfondo del badge */
+    color: white;               /* Colore del testo */
+    font-size: 12px;            /* Dimensione del testo */
+    font-weight: bold;          /* Testo in grassetto */
+    border-radius: 50%;         /* Rende il badge circolare */
+    width: 20px;                /* Larghezza del badge */
+    height: 20px;               /* Altezza del badge */
+    display: flex;              /* Usato per centrare il testo */
+    align-items: center;        /* Centra verticalmente il testo */
+    justify-content: center;    /* Centra orizzontalmente il testo */
+    padding: 0;         
+}
+.carrello-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Griglia responsiva */
+    gap: 20px; /* Spaziatura tra gli articoli */
+    padding: 20px; /* Spaziatura interna */
+}
+
+.carrello-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    gap: 10px; /* Spaziatura uniforme tra elementi */
+}
+
+.carrello-item img {
+    max-width: 100%; /* Adatta l'immagine */
+    border-radius: 4px;
+}
+
+.carrello-item h3 {
+    font-size: 18px;
+    margin: 10px 0;
+    text-align: center;
+
+}
+
+.carrello-item p {
+    font-size: 16px;
+    margin: 5px 0;
+    text-align: center;
+
+}
+
+.carrello-item button {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+
+}
+
+.carrello-item button:hover {
+    background-color: #0056b3;
+}
+@media (max-width: 768px) {
+    .carrello-item {
+        padding: 10px;
+    }
+
+    .carrello-item h3, .carrello-item p {
+        font-size: 14px;
+    }
+
+    .carrello-item button {
+        padding: 6px 10px;
+    }
+}
+

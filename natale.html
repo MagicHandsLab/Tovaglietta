@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <link rel="icon" href="img/favicon.png" type="image/x-icon">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prodotti di Natale</title>
+    <link rel="stylesheet" href="css/style.css"> <!-- Associa il tuo CSS -->
+</head>
+<body>
+    <header>
+        <!-- Logo posizionato sopra l'header -->
+        <div class="logo-container">
+            <img src="img/logo.png" alt="Logo del sito" class="logo">
+        </div>
+        
+        <div class="header">
+            <a href="index.html" class="back-home-icon">
+            <img src="img/homeicon.png" alt="Home" class="icon">
+            </a>
+            <h1>Natale</h1>            
+            <!-- Icona carrello -->
+            <div class="cart-container">
+                <img src="img/carrello.png" alt="Carrello" class="cart-icon" onclick="vaiAlCheckout()">
+                <span id="conteggioCarrello" class="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="product-grid">
+        <h2>Seleziona i Prodotti per il Tuo Natale</h2>
+        <div class="grid-container">
+            <!-- Prodotto 1 -->
+            <div class="product">
+                <img src="img/prd/prodotto1.png" alt="Prodotto 1" class="product-image">
+                <p>Prodotto 1</p>
+                <button class="add-to-cart-btn" onclick="aggiungiProdottoNatale('Albero', 10, 'img/prd/prodotto1.png')" data-product="Prodotto 1" data-price="15">Aggiungi al Carrello - 10€</button>
+            </div>
+            <!-- Prodotto 2 -->
+            <div class="product">
+                <img src="img/prd/prodotto2.png" alt="Prodotto 2" class="product-image">
+                <p>Prodotto 2</p>
+                <button class="add-to-cart-btn" onclick="aggiungiProdottoNatale('Fuoriporta', 15, 'img/prd/prodotto2.png')" data-product="Prodotto 1" data-price="15">Aggiungi al Carrello - 15€</button>
+            </div>
+            
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 MagicHandsLab. Tutti i diritti riservati.</p>
+    </footer>
+
+<script src="script.js" defer></script>
+<script src="checkout.js" defer></script>
+
+</body>
+</html>
