@@ -68,6 +68,8 @@ body.index-page .header h1 {
     align-items: center;
     justify-content: space-between; /* Spazio tra gli elementi */
     padding: 10px 20px;
+    width: 100%; /* Occupa tutta la larghezza dello schermo */
+    box-sizing: border-box; /* Include padding nel calcolo della larghezza */
     background-color: transparent;  
 }
 /* Stile per il titolo */
@@ -203,10 +205,14 @@ body.index-page .header h1 {
         align-items: center; /* Centra gli elementi */
         gap: 10px; /* Spaziatura tra gli elementi */
     }
+    .header * {
+        max-width: 100%; /* Impedisce agli elementi di eccedere la larghezza */
+    }
    #title {
         font-size: 20px; /* Riduce la dimensione del titolo */
         white-space: normal; /* Permette al titolo di andare a capo */
         text-align: center;
+        word-wrap: break-word; 
     }
     .container {
         flex-direction: column; /* Disposizione verticale per mobile */
@@ -265,7 +271,12 @@ main {
     justify-content: center;
     align-items: center;
 }
-
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%; /* Imposta larghezza piena per tutto il corpo */
+    overflow-x: hidden; /* Rimuove lo scorrimento orizzontale */
+}
 
 #accessoriModal.show {
     display: block;
