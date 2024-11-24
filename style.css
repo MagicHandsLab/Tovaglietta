@@ -272,9 +272,7 @@ main {
     align-items: center;
 }
 body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%; /* Imposta larghezza piena per tutto il corpo */
+    
     overflow-x: hidden; /* Rimuove lo scorrimento orizzontale */
 }
 
