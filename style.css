@@ -56,9 +56,7 @@
 }
 
 
-.header h1 {
-    white-space: nowrap;
-}
+
 body.index-page .header h1 {
     margin-right: 10px; /* Corregge eventuale spazio mancante */
 }
@@ -71,6 +69,15 @@ body.index-page .header h1 {
     justify-content: space-between; /* Spazio tra gli elementi */
     padding: 10px 20px;
     background-color: transparent;
+   
+}
+/* Stile per il titolo */
+#title1 {
+    flex: 1; /* Occupa lo spazio disponibile */
+    text-align: center; /* Centra il titolo */
+    font-size: 20px; /* Dimensione base */
+    margin: 0; /* Rimuove margini indesiderati */
+    white-space: nowrap; /* Impedisce che vada a capo */
 }
 /* Contenuto dell'header */
 .header-content {
@@ -194,6 +201,11 @@ body.index-page .header h1 {
 
 /* Layout per dispositivi mobili */
 @media (max-width: 768px) {
+   #title {
+        font-size: 20px; /* Riduce la dimensione del titolo */
+        white-space: normal; /* Permette al titolo di andare a capo */
+        text-align: center;
+    }
     .container {
         flex-direction: column; /* Disposizione verticale per mobile */
         align-items: center;
