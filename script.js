@@ -1,8 +1,8 @@
 
-let carrello = JSON.parse(localStorage.getItem('carrello')) || []; // Recupera il carrello dal localStorage o inizializza un array vuoto
+let carrello = JSON.parse(sessionStorage.getItem('carrello')) || []; // Recupera il carrello dal localStorage o inizializza un array vuoto
 // Inizializza il conteggio al caricamento della pagina
 document.addEventListener("DOMContentLoaded", () => {
-    carrello = JSON.parse(localStorage.getItem('carrello')) || [];
+    carrello = JSON.parse(sessionStorage.getItem('carrello')) || [];
     aggiornaConteggioCarrello();
 });
 // Inizializza il canvas di Fabric.js
@@ -303,7 +303,7 @@ function aggiungiArticolo() {
         };
         
         carrello.push(tovaglietta); // Aggiungi al carrello
-        localStorage.setItem('carrello', JSON.stringify(carrello)); // Salva il carrello aggiornato nel localStorage
+        sessionStorage.setItem('carrello', JSON.stringify(carrello)); // Salva il carrello aggiornato nel localStorage
         
         aggiornaConteggioCarrello(); // Aggiorna il contatore del carrello
         alert("Articolo aggiunto al carrello!");
@@ -314,7 +314,7 @@ function aggiungiArticolo() {
 
 // Funzione per gestire il click sul bottone del carrello
 function vaiAlCheckout() {
-    const carrelloSalvato = JSON.parse(localStorage.getItem('carrello')) || [];
+    const carrelloSalvato = JSON.parse(sessionStorage.getItem('carrello')) || [];
 
     if (carrelloSalvato > 0) {
         // Se ci sono articoli nel carrello, vai alla pagina di checkout
@@ -375,19 +375,19 @@ function cambiaColoreTitolo() {
 cambiaColoreTitolo();
 // Recupera il carrello da localStorage
 function getCarrello() {
-    return JSON.parse(localStorage.getItem("carrello")) || [];
+    return JSON.parse(sessionStorage.getItem("carrello")) || [];
 }
 
 // Salva il carrello in localStorage
 function setCarrello(carrello) {
-    localStorage.setItem("carrello", JSON.stringify(carrello));
+    sessionStorage.setItem("carrello", JSON.stringify(carrello));
 }
 
 // Aggiunge un prodotto al carrello
 function aggiungiAlCarrello(prodotto) {
-    let carrello = JSON.parse(localStorage.getItem("carrello")) || [];
+    let carrello = JSON.parse(sessionStorage.getItem("carrello")) || [];
     carrello.push(prodotto);
-    localStorage.setItem("carrello", JSON.stringify(carrello));
+    sessionStorage.setItem("carrello", JSON.stringify(carrello));
     aggiornaBadgeCarrello();
 }
 

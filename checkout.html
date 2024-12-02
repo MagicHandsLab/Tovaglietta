@@ -149,7 +149,7 @@
         // Funzione per completare l'ordine
         function completaOrdine() {
             alert("Ordine completato con successo!");
-            localStorage.removeItem("tovagliettaPersonalizzata"); // Rimuove dal carrello
+            sessionStorage.removeItem("tovagliettaPersonalizzata"); // Rimuove dal carrello
             window.location.href = "ordine-completato.html"; // Reindirizza a pagina di conferma
         }
 

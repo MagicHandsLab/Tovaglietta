@@ -1,8 +1,8 @@
 // Recupera il carrello dal localStorage
-let carrello = JSON.parse(localStorage.getItem('carrello')) || [];
+let carrello = JSON.parse(sessionStorage.getItem('carrello')) || [];
 // Inizializza il conteggio al caricamento della pagina
 document.addEventListener("DOMContentLoaded", () => {
-    carrello = JSON.parse(localStorage.getItem('carrello')) || [];
+    carrello = JSON.parse(sessionStorage.getItem('carrello')) || [];
     aggiornaConteggioCarrello();
 });
 function aggiornaConteggioCarrello() {
@@ -50,7 +50,7 @@ function rimuoviArticolo(index) {
     carrello.splice(index, 1);
 
     // Aggiorna il `localStorage` con il nuovo array `carrello`
-    localStorage.setItem('carrello', JSON.stringify(carrello));
+    sessionStorage.setItem('carrello', JSON.stringify(carrello));
 
     // Ricarica l'elenco degli articoli e il totale
     mostraCarrello();
@@ -62,7 +62,7 @@ function calcolaTotaleCarrello() {
 }
 // Funzione per gestire il click sul bottone del carrello
 function vaiAlCheckout() {
-    const carrelloSalvato = JSON.parse(localStorage.getItem('carrello')) || [];
+    const carrelloSalvato = JSON.parse(sessionStorage.getItem('carrello')) || [];
 
     if (carrelloSalvato > 0) {
         // Se ci sono articoli nel carrello, vai alla pagina di checkout

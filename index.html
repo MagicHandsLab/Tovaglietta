@@ -3,6 +3,7 @@
 <head>
 <link rel="icon" href="img/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-B7WMPCF911"></script>
@@ -250,40 +251,7 @@
             <button id="scarica-immagine">Scarica Immagine</button>
             <!-- Pulsante Aggiungi al Carrello -->
             <button id="btnCarrello" onclick="aggiungiArticolo()">Aggiungi al Carrello</button>
-    <script>
-        // Funzione per aggiungere la tovaglietta personalizzata al carrello e aprire la pagina di checkout
-function aggiungiAlCarrello() {
-            // Prende il contenuto del canvas come immagine (base64)
-    const canvas = document.getElementById("tovaglietta-canvas");
-    if (canvas) {
-        const context = canvas.getContext("2d");
 
-        // Ottieni i dati di immagine dal canvas
-        const imgData = context.getImageData(0, 0, canvas.width, canvas.height).data;
-
-        // Verifica se tutti i pixel sono trasparenti
-        let isEmpty = true;
-        for (let i = 0; i < imgData.length; i += 4) {
-            if (imgData[i + 3] !== 0) { // Controlla il canale alpha per vedere se è trasparente
-                isEmpty = false;
-                break;
-            }
-        }
-
-        if (isEmpty) {
-            alert("Errore: Il contenuto è vuoto. Personalizza la tovaglietta prima di aggiungerla al carrello.");
-            return;
-        }
-
-        // Se il canvas non è vuoto, procedi con la conversione a Base64 e salvataggio
-        const imgBase64 = canvas.toDataURL("image/png");
-        localStorage.setItem("tovagliettaPersonalizzata", imgBase64);
-        aggiornaConteggioCarrello()
-    } else {
-        alert("Errore: Aggiungi una tovaglietta per procedere.");
-    }
-        }
-    </script>
             <div id="canvas-container">
                 <canvas id="tovaglietta-canvas" width="300" height="300"></canvas>
             </div>
