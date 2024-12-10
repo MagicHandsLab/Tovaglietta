@@ -1,5 +1,5 @@
 
-let carrello = JSON.parse(sessionStorage.getItem('carrello')) || []; // Recupera il carrello dal localStorage o inizializza un array vuoto
+let carrello = JSON.parse(sessionStorage.getItem('carrello')) || []; // Recupera il carrello dal sessionStorage o inizializza un array vuoto
 // Inizializza il conteggio al caricamento della pagina
 document.addEventListener("DOMContentLoaded", () => {
     carrello = JSON.parse(sessionStorage.getItem('carrello')) || [];
@@ -275,9 +275,10 @@ function rimuoviOggetto() {
 function aggiungiArticolo() {
     const canvas = document.getElementById("tovaglietta-canvas");
     if (canvas) {
-        const canvasImage = canvas.toDataURL("image/png"); // Converti il contenuto del canvas in una stringa Base64
+        const canvasImage = canvas.toDataURL("image/jpeg', 0.5"); // Converti il contenuto del canvas in una stringa Base64
         const prezzo = 10.00; // Esempio di prezzo per una tovaglietta personalizzata, può essere dinamico se hai diversi prezzi
         const context = canvas.getContext("2d");
+
 
         // Ottieni i dati di immagine dal canvas
         const imgData = context.getImageData(0, 0, canvas.width, canvas.height).data;
@@ -295,18 +296,37 @@ function aggiungiArticolo() {
             alert("Errore: Il contenuto è vuoto. Personalizza la tovaglietta prima di aggiungerla al carrello.");
             return;
         }
-        // Aggiungi la tovaglietta al carrello
-        const tovaglietta = {
+
+    const originalCanvas = document.getElementById('tovaglietta-canvas');
+    const tempCanvas = document.createElement('canvas');
+    const tempCtx = tempCanvas.getContext('2d');
+
+// Imposta la stessa dimensione del canvas originale
+tempCanvas.width = originalCanvas.width;
+tempCanvas.height = originalCanvas.height;
+
+// Copia solo il contenuto senza il contorno
+tempCtx.drawImage(originalCanvas, 0, 0);
+
+// Converti il canvas temporaneo in Blob
+tempCanvas.toBlob((blob) => {
+    
+    // Salva l'immagine come URL Blob temporaneo
+     blobUrl = URL.createObjectURL(blob);
+    // Aggiungi la tovaglietta al carrello
+        const prodotto = {
             id: carrello.length + 1,
-            immagine: canvasImage,
+            immagine: blobUrl,
             prezzo: prezzo,
         };
+                aggiungiAlCarrello(prodotto);
+
+        }, 'image/png', 0.7); // Formato JPEG, qualità 0.7
+
+
+
         
-        carrello.push(tovaglietta); // Aggiungi al carrello
-        sessionStorage.setItem('carrello', JSON.stringify(carrello)); // Salva il carrello aggiornato nel localStorage
         
-        aggiornaConteggioCarrello(); // Aggiorna il contatore del carrello
-        alert("Articolo aggiunto al carrello!");
     } else {
         alert("Errore: canvas non trovato.");
     }
@@ -315,15 +335,16 @@ function aggiungiArticolo() {
 // Funzione per gestire il click sul bottone del carrello
 function vaiAlCheckout() {
     const carrelloSalvato = JSON.parse(sessionStorage.getItem('carrello')) || [];
-
     if (carrelloSalvato > 0) {
         // Se ci sono articoli nel carrello, vai alla pagina di checkout
         window.location.href = "checkout.html";
     } else {
-        // Altrimenti mostra un messaggio di errore
         window.location.href = "checkout.html";
-       // alert("Il carrello è vuoto. Aggiungi articoli prima di procedere al checkout.");
+
+        // Altrimenti mostra un messaggio di errore
+        //alert("Il carrello è vuoto. Aggiungi articoli prima di procedere al checkout.");
     }
+
 }
 
 function aggiornaConteggioCarrello() {
@@ -335,13 +356,13 @@ function aggiornaConteggioCarrello() {
 
 document.addEventListener("DOMContentLoaded", function () {
     // Controlla se il banner è già stato mostrato in questa sessione
-    if (!sessionStorage.getItem("bannerShown")) {
+    if (!localStorage.getItem("bannerShown")) {
         // Mostra il banner aggiungendo la classe "show"
         const banner = document.getElementById("popupOverlay");
         banner.classList.add("show");
 
         // Imposta il flag per indicare che il banner è stato mostrato
-        sessionStorage.setItem("bannerShown", "true");
+        localStorage.setItem("bannerShown", "true");
     }
 });
 
@@ -373,15 +394,12 @@ function cambiaColoreTitolo() {
 
         // Inizializza il cambiamento di colore del titolo all'avvio
 cambiaColoreTitolo();
-// Recupera il carrello da localStorage
+// Recupera il carrello da sessionStorage
 function getCarrello() {
     return JSON.parse(sessionStorage.getItem("carrello")) || [];
 }
 
-// Salva il carrello in localStorage
-function setCarrello(carrello) {
-    sessionStorage.setItem("carrello", JSON.stringify(carrello));
-}
+
 
 // Aggiunge un prodotto al carrello
 function aggiungiAlCarrello(prodotto) {
@@ -389,8 +407,23 @@ function aggiungiAlCarrello(prodotto) {
     carrello.push(prodotto);
     sessionStorage.setItem("carrello", JSON.stringify(carrello));
     aggiornaBadgeCarrello();
+    alert("Articolo aggiunto al carrello!");
+
+    const dimensioneCarrello = new Blob([carrello]).size;
+
+    console.log(`Dimensione dell'articolo in memoria: ${(dimensioneCarrello / 1024).toFixed(2)} KB`);
+
+
+let totaleMemoriaUsata = 0;
+for (let i = 0; i < sessionStorage.length; i++) {
+    const chiave = sessionStorage.key(i);
+    totaleMemoriaUsata += new Blob([sessionStorage.getItem(chiave)]).size;
 }
 
+console.log(`Totale memoria usata in sessionStorage: ${totaleMemoriaUsata / 1024} KB`);
+
+
+}
 
 // Aggiorna il badge con il conteggio articoli
 function aggiornaBadgeCarrello() {
@@ -407,3 +440,4 @@ function aggiungiProdottoNatale(nome, prezzo, immagine) {
     aggiungiAlCarrello(prodotto);
     alert(`${nome} è stato aggiunto al carrello!`);
 }
+

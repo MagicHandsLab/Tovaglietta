@@ -1,4 +1,4 @@
-// Recupera il carrello dal localStorage
+// Recupera il carrello dal sessionStorage
 let carrello = JSON.parse(sessionStorage.getItem('carrello')) || [];
 // Inizializza il conteggio al caricamento della pagina
 document.addEventListener("DOMContentLoaded", () => {
@@ -49,7 +49,7 @@ function rimuoviArticolo(index) {
     // Rimuove l'articolo dall'array `carrello`
     carrello.splice(index, 1);
 
-    // Aggiorna il `localStorage` con il nuovo array `carrello`
+    // Aggiorna il `sessionStorage` con il nuovo array `carrello`
     sessionStorage.setItem('carrello', JSON.stringify(carrello));
 
     // Ricarica l'elenco degli articoli e il totale
