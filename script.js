@@ -22,7 +22,7 @@ function resizeCanvas() {
     ctx.drawImage(img, padding, padding, imgWidth, imgHeight);
 }
 // Prezzi di base
-const prezzoBase = 10.00; // Prezzo di base della tovaglietta
+const prezzoBase = 12.00; // Prezzo di base della tovaglietta
 const costoNome = 2.00;  // Costo per aggiungere un nome
 const costoAccessorio = 0.50; // Costo per aggiungere un accessorio
 
@@ -276,7 +276,7 @@ function aggiungiArticolo() {
     const canvas = document.getElementById("tovaglietta-canvas");
     if (canvas) {
         const canvasImage = canvas.toDataURL("image/jpeg', 0.5"); // Converti il contenuto del canvas in una stringa Base64
-        const prezzo = 10.00; // Esempio di prezzo per una tovaglietta personalizzata, può essere dinamico se hai diversi prezzi
+        const prezzo = 12.00; // Esempio di prezzo per una tovaglietta personalizzata, può essere dinamico se hai diversi prezzi
         const context = canvas.getContext("2d");
 
 
