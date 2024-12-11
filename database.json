@@ -27,10 +27,10 @@
     "farfalla": [
         { "nome": "farfalla1", "immagine": "img/farfalla1.png", "quantità": 3 },
         { "nome": "farfalla2", "immagine": "img/farfalla2.png", "quantità": 3 },
-        { "nome": "farfalla3", "immagine": "img/farfalla3.png", "quantità": 2 },
+        { "nome": "farfalla3", "immagine": "img/farfalla3.png", "quantità": 0 },
         { "nome": "farfalla4", "immagine": "img/farfalla4.png", "quantità": 3 },
         { "nome": "farfalla5", "immagine": "img/farfalla5.png", "quantità": 4 },
-        { "nome": "farfalla6", "immagine": "img/farfalla6.png", "quantità": 2 }
+        { "nome": "farfalla6", "immagine": "img/farfalla6.png", "quantità": 0 }
     ],
     "fiore": [
         { "nome": "fiore1", "immagine": "img/fiore1.png", "quantità": 2 },
