@@ -69,9 +69,8 @@ body.index-page  {
     align-items: center;
     padding: 10px 20px;
     justify-content: space-between; /* Spaziatura tra logo, menu e carrello */
-
-    /*width: 100%; /* Occupa tutta la larghezza dello schermo */
-    /*box-sizing: border-box;  Include padding nel calcolo della larghezza */
+    width: 100%; /* Occupa tutta la larghezza dello schermo */
+    box-sizing: border-box;  /*Include padding nel calcolo della larghezza */
     background-color: transparent;  
 }
 /* Stile per il titolo */
@@ -206,6 +205,8 @@ body.index-page  {
     .header {
         align-items: center; /* Centra gli elementi */
         gap: 10px; /* Spaziatura tra gli elementi */
+        justifys-content: space-between; /* Spaziatura tra logo, menu e carrello */
+
     }
     .header * {
         max-width: 100%; /* Impedisce agli elementi di eccedere la larghezza */
