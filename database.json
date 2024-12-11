@@ -5,7 +5,7 @@
     ],
     "cuore": [
         { "nome": "cuore1", "immagine": "img/cuore1.png", "quantità": 16 },
-        { "nome": "cuore2", "immagine": "img/cuore2.png", "quantità": 12 },
+        { "nome": "cuore2", "immagine": "img/cuore2.png", "quantità": 0 },
         { "nome": "cuore3", "immagine": "img/cuore3.png", "quantità": 17 },
         { "nome": "cuore4", "immagine": "img/cuore4.png", "quantità": 13 },
         { "nome": "cuore5", "immagine": "img/cuore5.png", "quantità": 14 },
@@ -48,7 +48,7 @@
         { "nome": "foglia2", "immagine": "img/foglia2.png", "quantità": 3 },
         { "nome": "foglia3", "immagine": "img/foglia3.png", "quantità": 2 },
         { "nome": "foglia4", "immagine": "img/foglia4.png", "quantità": 6 },
-        { "nome": "foglia5", "immagine": "img/foglia5.png", "quantità": 7 },
+        { "nome": "foglia5", "immagine": "img/foglia5.png", "quantità": 0 },
         { "nome": "foglia6", "immagine": "img/foglia6.png", "quantità": 5 }
     ]
 }
