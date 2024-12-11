@@ -64,9 +64,12 @@ body.index-page  {
 
 /* Stile per il contenitore dell'header */
 .header {
+    position: relative; /* Posizione normale per l'header */
     display: flex;
     align-items: center;
     padding: 10px 20px;
+    justify-content: space-between; /* Spaziatura tra logo, menu e carrello */
+
     /*width: 100%; /* Occupa tutta la larghezza dello schermo */
     /*box-sizing: border-box;  Include padding nel calcolo della larghezza */
     background-color: transparent;  
@@ -156,7 +159,7 @@ body.index-page  {
     display: flex;
     right: 10px;
     align-items: center;
-    position: fixed;
+    position: relative;
     transform: translateX(0); 
 }
 
@@ -228,7 +231,7 @@ body.index-page  {
         height: 20px;
     }
 
-    button, input[type="text"] {
+    input[type="text"] {
         width: 100%; /* Larghezza completa per pulsanti e campi di testo */
         font-size: 1rem; /* Dimensione testo maggiore per migliorare la leggibilità */
         margin-top: 10px;
