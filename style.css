@@ -64,20 +64,18 @@ body.index-page  {
 
 /* Stile per il contenitore dell'header */
 .header {
-    position: relative; /* Posizione normale per l'header */
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    justify-content: space-between; /* Spaziatura tra logo, menu e carrello */
-    width: 100%; /* Occupa tutta la larghezza dello schermo */
-    box-sizing: border-box;  /*Include padding nel calcolo della larghezza */
-    background-color: transparent;  
+   width: 100%; /* Occupa tutta la larghezza dello schermo */
+    display: flex; /* Usato per posizionare gli elementi */
+    align-items: center; /* Allinea verticalmente */
+    justify-content: space-between; /* Distribuisce elementi agli estremi */
+    padding: 10px 20px; /* Spazio interno */
+    box-sizing: border-box; /* Include padding nella larghezza totale */
 }
 /* Stile per il titolo */
 #title1 {
     text-align: center; /* Centra il titolo */
-    font-size: 20px; /* Dimensione base */
-    white-space: nowrap; /* Impedisce che vada a capo */
+    font-size: 40px; /* Dimensione base */
+    word-wrap: break-word; 
 }
 /* Contenuto dell'header */
 .header-content {
@@ -93,6 +91,7 @@ body.index-page  {
     background: transparent;
     cursor: pointer;
     font-size: 24px;
+
 }
 
 /* Stile per il menu laterale */
@@ -156,7 +155,6 @@ body.index-page  {
 /* Stile per il contenitore del carrello */
 .cart-container {
     display: flex;
-    right: 10px;
     align-items: center;
     position: relative;
     transform: translateX(0); 
@@ -211,8 +209,8 @@ body.index-page  {
     .header * {
         max-width: 100%; /* Impedisce agli elementi di eccedere la larghezza */
     }
-   #title {
-        font-size: 10px; /* Riduce la dimensione del titolo */
+   #title1 {
+        font-size: 20px; /* Riduce la dimensione del titolo */
         white-space: normal; /* Permette al titolo di andare a capo */
         text-align: center;
         word-wrap: break-word; 
